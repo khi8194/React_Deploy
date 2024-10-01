@@ -19,6 +19,8 @@ import Members from './components/sub/Members';
 import Posts from './components/sub/Posts';
 import Youtube from './components/sub/Youtube';
 
+import { Route, Routes } from 'react-router-dom';
+
 //8. 만약 불필요한 wrapping요소 없이 그룹화하고 싶을때 (<> </>) fragment로 감싸줌
 
 export default function App() {
@@ -26,12 +28,14 @@ export default function App() {
 		<>
 			<Header />
 
-			<Home />
-			<Members />
-			<Gallery />
-			<Youtube />
-			<Contact />
-			<Posts />
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/members' element={<Members />} />
+				<Route path='/gallery' element={<Gallery />} />
+				<Route path='/youtube' element={<Youtube />} />
+				<Route path='/contact' element={<Contact />} />
+				<Route path='/posts' element={<Posts />} />
+			</Routes>
 
 			<Footer />
 		</>
