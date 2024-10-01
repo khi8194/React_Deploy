@@ -1,3 +1,8 @@
+// import { FaYoutube } from 'react-icons/fa';
+// import { FaInstagram } from 'react-icons/fa';
+// import { FaEnvelope } from 'react-icons/fa';
+import { FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
+
 export default function Header() {
 	return (
 		<header className='header'>
@@ -21,6 +26,18 @@ export default function Header() {
 					</li>
 					<li>
 						<a href='#'>POSTS</a>
+					</li>
+				</ul>
+
+				<ul className='sns'>
+					<li>
+						<FaYoutube />
+					</li>
+					<li>
+						<FaInstagram />
+					</li>
+					<li>
+						<FaEnvelope />
 					</li>
 				</ul>
 			</nav>
