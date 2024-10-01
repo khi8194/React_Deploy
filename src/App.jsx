@@ -10,23 +10,16 @@
 //7. 컴포넌트 호출 방식 <컴포넌트함수명/>
 
 //8. 만약 불필요한 wrapping요소 없이 그룹화하고 싶을때 (<> </>) fragment로 감싸줌
+
+import List from './List';
+import Title from './Title';
+
 function App() {
 
   return (
     <>
-      <h1 
-        className="abc" 
-        // style={{color: 'red'}}
-        >
-        Hello
-      </h1>  
-      {/* <h2>World</h2> */}
-      {/* ul>li*3{list$} */}
-      <ul>
-        <li>list1</li>
-        <li>list2</li>
-        <li>list3</li>
-      </ul>
+      <Title />
+      <List />
     </>
   );
 }
