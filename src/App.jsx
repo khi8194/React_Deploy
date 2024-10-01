@@ -25,12 +25,14 @@ export default function App() {
 	return (
 		<>
 			<Header />
+
 			<Home />
 			<Members />
 			<Gallery />
 			<Youtube />
 			<Contact />
 			<Posts />
+
 			<Footer />
 		</>
 	);
