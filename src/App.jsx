@@ -11,6 +11,7 @@
 
 //8. 만약 불필요한 wrapping요소 없이 그룹화하고 싶을때 (<> </>) fragment로 감싸줌
 
+import {BtnA,BtnB} from './Btn';
 import List from './List';
 import Title from './Title';
 
@@ -20,6 +21,8 @@ function App() {
     <>
       <Title />
       <List />
+      <BtnA />
+      <BtnB />
     </>
   );
 }
