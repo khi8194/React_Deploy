@@ -13,6 +13,12 @@ import Footer from './components/common/Footer';
 import Header from './components/common/Header';
 import Home from './components/main/Home';
 
+import Contact from './components/sub/Contact';
+import Gallery from './components/sub/Gallery';
+import Members from './components/sub/Members';
+import Posts from './components/sub/Posts';
+import Youtube from './components/sub/Youtube';
+
 //8. 만약 불필요한 wrapping요소 없이 그룹화하고 싶을때 (<> </>) fragment로 감싸줌
 
 export default function App() {
@@ -20,6 +26,11 @@ export default function App() {
 		<>
 			<Header />
 			<Home />
+			<Members />
+			<Gallery />
+			<Youtube />
+			<Contact />
+			<Posts />
 			<Footer />
 		</>
 	);
