@@ -1,9 +1,15 @@
 import { FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
 	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
+
+	// const path = useLocation();
+	// console.log(path);		//고유키값 path이름값
+	const { pathname } = useLocation();
+	console.log(pathname);
+
 	return (
 		<header className='header'>
 			<h1>
@@ -30,8 +36,10 @@ export default function Header() {
 				</ul> */}
 				<ul className='gnb'>
 					{gnbArr.map((data, idx) => {
+						//미션
+						//위의 pathname값을 활용해서 gnb의 li 요소에 on클래스를 붙여서 메뉴명 활성화 로직 구현
 						return (
-							<li key={idx}>
+							<li key={idx} className={pathname === '/' + data ? 'on' : ''}>
 								<Link to={'/' + data}>{data.toUpperCase()}</Link>
 							</li>
 						);

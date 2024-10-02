@@ -22,13 +22,17 @@
 			display: flex;
 			gap: 60px;
 			font: 600 0.8rem/1 'orbitron';
-			color: #555;
-		}
-		.sns {
-			display: flex;
-			font-size: 1rem;
-			color: #888;
-			gap: 20px;
+			color: #bbb;
+
+			li.on {
+				color: #000;
+			}
+			.sns {
+				display: flex;
+				font-size: 1rem;
+				color: #888;
+				gap: 20px;
+			}
 		}
 	}
 }
