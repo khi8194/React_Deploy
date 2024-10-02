@@ -10,12 +10,23 @@
 // 	);
 // }
 
-import Title from '../common/Title';
+// import Title from '../common/Title';
+
+// export default function Members() {
+// 	return (
+// 		<main className='members'>
+// 			<Title>MEMBERS</Title>
+// 		</main>
+// 	);
+// }
+
+import Layout from '../common/Layout';
+// import Title from '../common/Title';
 
 export default function Members() {
 	return (
-		<main className='members'>
-			<Title>MEMBERS</Title>
-		</main>
+		<Layout title={'MEMBERS'}>
+			<p>Members Page contents come here.</p>
+		</Layout>
 	);
 }
