@@ -16,7 +16,7 @@
 // 	);
 // }
 
-export default function Title({ color, children }) {
+export default function Title({ color = '#333', children }) {
 	return (
 		<h1 className='title' style={{ color: color }}>
 			{children}
@@ -25,3 +25,6 @@ export default function Title({ color, children }) {
 }
 // 강의 오전 10:05
 //props.children을 이용해서 복잡한 구조의 데이터를 자식컴포넌트로 전달
+
+//미션
+//해당 children 속성을 활용해서 모든 서브페이지 동일한 구조의 틀을 유지하도록 Layout.jsx컴포넌트를 어떤식으로 구성할지 고민
