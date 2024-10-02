@@ -1,38 +1,11 @@
-// import { FaYoutube } from 'react-icons/fa';
-// import { FaInstagram } from 'react-icons/fa';
-// import { FaEnvelope } from 'react-icons/fa';
 import { FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-//React의 Link컴포넌트를 활용해서 메뉴이동처리 하면
-//불필요한 서버요청 없이 미리 한번에 불러온 컴포넌트를 실시간으로 클라이언트단에서 변경처리 가능
 
 export default function Header() {
 	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
+	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
 	return (
 		<header className='header'>
-			{/* <h1>
-				<a href='/'>ALPACO</a>
-			</h1>
-
-			<nav>
-				<ul className='gnb'>
-					<li>
-						<a href='/members'>MEMBERS</a>
-					</li>
-					<li>
-						<a href='/gallery'>GALLERY</a>
-					</li>
-					<li>
-						<a href='/youtube'>YOUTUBE</a>
-					</li>
-					<li>
-						<a href='/contact'>CONTACT</a>
-					</li>
-					<li>
-						<a href='/posts'>POSTS</a>
-					</li>
-				</ul> */}
-
 			<h1>
 				<Link to={'/'}>ALPACO</Link>
 			</h1>
@@ -66,7 +39,7 @@ export default function Header() {
 				</ul>
 
 				<ul className='sns'>
-					<li>
+					{/* <li>
 						<FaYoutube />
 					</li>
 					<li>
@@ -74,7 +47,16 @@ export default function Header() {
 					</li>
 					<li>
 						<FaEnvelope />
-					</li>
+					</li> */}
+					{/* 화살표함수 특성상 JSX반환시 {return}문은 생략 가능 */}
+					{snsArr.map((Data, idx) => {
+						// return (
+						<li key={idx}>
+							{/* snsArr에서 반복을 돌면서 Data파라미터로 전달되는 각각의 객체는 컴포넌트 함수 아래와같이 JSX문으로 호출 가능 이때 컴포넌트 규칙에 따라 파리미터 명도 대문자로 시작해서 호출 */}
+							<Data />
+						</li>;
+						// );
+					})}
 				</ul>
 			</nav>
 		</header>
