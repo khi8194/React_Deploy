@@ -1,4 +1,4 @@
-import { FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaBars, FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -67,6 +67,8 @@ export default function Header() {
 					})}
 				</ul>
 			</nav>
+
+			<FaBars className='btnMenuToggle' />
 		</header>
 	);
 }
