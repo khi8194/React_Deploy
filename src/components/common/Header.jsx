@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 //불필요한 서버요청 없이 미리 한번에 불러온 컴포넌트를 실시간으로 클라이언트단에서 변경처리 가능
 
 export default function Header() {
+	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
 	return (
 		<header className='header'>
 			{/* <h1>
@@ -37,7 +38,7 @@ export default function Header() {
 			</h1>
 
 			<nav>
-				<ul className='gnb'>
+				{/* <ul className='gnb'>
 					<li>
 						<Link to={'/members'}>MEMBERS</Link>
 					</li>
@@ -53,6 +54,15 @@ export default function Header() {
 					<li>
 						<Link to={'/posts'}>POSTS</Link>
 					</li>
+				</ul> */}
+				<ul className='gnb'>
+					{gnbArr.map((data, idx) => {
+						return (
+							<li key={idx}>
+								<Link to={'/' + data}>{data.toUpperCase()}</Link>
+							</li>
+						);
+					})}
 				</ul>
 
 				<ul className='sns'>

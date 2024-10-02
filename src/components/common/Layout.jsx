@@ -1,6 +1,6 @@
 export default function Layout({ title, children }) {
 	return (
-		<main className={title}>
+		<main className={title.toUpperCase()}>
 			<h1>{title}</h1>
 
 			<section>{children}</section>
