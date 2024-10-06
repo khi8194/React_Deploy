@@ -39,7 +39,7 @@ export default function Youtube() {
 						<h3>
 							<Link to={'/youtube/' + vid.id}>{shortenText(vid.snippet.title, 60)}</Link>
 						</h3>
-						<div className='text'>
+						<div className='txt'>
 							<p>{shortenText(vid.snippet.description, 150)}</p>
 							<span>{combineText(vid.snippet.publishedAt.split('T')[0], '-', '.')}</span>
 						</div>
