@@ -34,13 +34,15 @@ export default function Youtube() {
 			{Vids.map((vid, idx) => {
 				return (
 					<article key={idx}>
-						<Pic className='thumb' src={vid.snippet.thumbnails.high.url} />
-						{/* <h3>{vid.snippet.title.length >= 60 ? vid.snippet.title.substr(0, 60) + '...' : vid.snippet.title}</h3> */}
+						{/* <Pic className='thumb' src={vid.snippet.thumbnails.high.url} /> */}
 						<h3>{shortenText(vid.snippet.title, 60)}</h3>
-						{/* <p>{vid.snippet.description}</p> */}
-						<p>{shortenText(vid.snippet.description, 150)}</p>
-						{/* <span>{vid.snippet.publishedAt}</span> */}
-						<span>{combineText(vid.snippet.publishedAt.split('T')[0], '-', '.')}</span>
+						{/* <p>{shortenText(vid.snippet.description, 150)}</p>
+						<span>{combineText(vid.snippet.publishedAt.split('T')[0], '-', '.')}</span> */}
+						<div className='text'>
+							<p>{shortenText(vid.snippet.description, 150)}</p>
+							<span>{combineText(vid.snippet.publishedAt.split('T')[0], '-', '.')}</span>
+						</div>
+						<Pic className='thumb' src={vid.snippet.thumbnails.high.url} />
 					</article>
 				);
 			})}
