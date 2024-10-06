@@ -5,7 +5,8 @@ import Pic from '../common/Pic';
 export default function Youtube() {
 	const [Vids, setVids] = useState([]);
 
-	const api_key = 'AIzaSyCKLA8E45lLrWn_7MlJL692LpwsZ9mwa_4';
+	// const api_key = 'AIzaSyCKLA8E45lLrWn_7MlJL692LpwsZ9mwa_4';
+	const api_key = import.meta.env.VITE_YOUTUBE_API;
 	const pid = 'PL7dKBcBdt1leSwaAYMfi9B9GkbLK_A_oh';
 	const num = 10;
 	const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}&maxResults=${num}`;
