@@ -13,7 +13,7 @@ export default function YoutubeDetail() {
 		//이전 목록화면에서 제목 클릭시 전달되는 id값을 params로 받아서
 		//새로운 요청 url을 만들고 useEffect로 컴포넌트 마운트시 한번만 서버쪽에 데이터 요청후 배열값 전달 받음
 		const api_key = import.meta.env.VITE_YOUTUBE_API;
-		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}&maxResults=${num}`;
+		const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
 
 		fetch(url)
 			.then(data => data.json())
