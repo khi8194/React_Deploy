@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
+import Pic from '../common/Pic';
 
 export default function Gallery() {
 	const [Flickr, setFlickr] = useState([]);
@@ -29,12 +30,16 @@ export default function Gallery() {
 
 					return (
 						<article key={idx}>
-							{/* <h3>{data.title}</h3> */}
 							{/* <img
 								src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
 								alt={data.title}
 							/> */}
-							<img className='pic' src={imgUrl} alt={data.title} />
+							{/* <img className='pic' src={imgUrl} alt={data.title} /> */}
+							<Pic
+								src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
+								className='pic'
+							/>
+							<h3>{data.title}</h3>
 						</article>
 					);
 				})}
