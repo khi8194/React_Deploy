@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import Pic from '../common/Pic';
+import Modal from '../common/Modal';
 
 export default function Gallery() {
 	const [Flickr, setFlickr] = useState([]);
@@ -22,28 +23,26 @@ export default function Gallery() {
 	}, []);
 
 	return (
-		<Layout title={'GALLERY'}>
-			<section className='galleryList'>
-				{Flickr.map((data, idx) => {
-					// const imgUrl = `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`;
+		// 복수개의 요소를 다루기 위해 하나로 묶어내기 (하나로 묶지 않으면 에러발생)
+		<>
+			<Layout title={'GALLERY'}>
+				<section className='galleryList'>
+					{Flickr.map((data, idx) => {
+						return (
+							<article key={idx}>
+								<Pic
+									src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
+									className='pic'
+									shadow
+								/>
+								<h3>{data.title}</h3>
+							</article>
+						);
+					})}
+				</section>
+			</Layout>
 
-					return (
-						<article key={idx}>
-							{/* <img
-								src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
-								alt={data.title}
-							/> */}
-							{/* <img className='pic' src={imgUrl} alt={data.title} /> */}
-							<Pic
-								src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
-								className='pic'
-								shadow
-							/>
-							<h3>{data.title}</h3>
-						</article>
-					);
-				})}
-			</section>
-		</Layout>
+			<Modal>FLICKR IMAGE</Modal>
+		</>
 	);
 }
