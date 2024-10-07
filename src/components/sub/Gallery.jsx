@@ -5,7 +5,6 @@ import Modal from '../common/Modal';
 
 export default function Gallery() {
 	const [Flickr, setFlickr] = useState([]);
-	//모달 컴포넌트 출력여부를 결정할 state생성
 	const [ModalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
@@ -23,8 +22,16 @@ export default function Gallery() {
 			});
 	}, []);
 
+	//의존성 배열에 ModalOpen 상태값을 연결해서 모달창이 열리고 닫힐때마다
+	//body요소의 스크롤바 기능 여부를 분기처리
+	//정리 : 리액트는 HTML,JS작업방식처럼 직접적인 DOM을 제어하는 방식이 아닌 State의 변경에 따라 간접적으로 기능이 구현되는 패턴을 주로 사용
+	//위와 같이 state에 따라 UI의 기능 화면이 변경되는 로직의 패턴을 사용하면
+	//복잡한 대단위 프로젝트에서 state상태값만 관리하면 되기에 업무 채산성, 효율성이 높아짐
+	useEffect(() => {
+		document.body.style.overflow = ModalOpen ? 'hidden' : 'auto';
+	}, [ModalOpen]);
+
 	return (
-		// 복수개의 요소를 다루기 위해 하나로 묶어내기 (하나로 묶지 않으면 에러발생)
 		<>
 			<Layout title={'GALLERY'}>
 				<section className='galleryList'>
@@ -43,14 +50,17 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			{/* ModalOpen 상태값이 true일때에만 Modal컴포넌트를 호출해서 출력 */}
-			{/* 자식 컴포넌트인 모달 안쪽에서 부모인 ModalOpen상태값을 변경해야 되기 때문에 상태변경함수 자체를 전달 */}
-			{ModalOpen && <Modal setModalOpen={setModalOpen}>FLICKR IMAGE</Modal>}
+			{ModalOpen && (
+				<Modal setModalOpen={setModalOpen} do>
+					FLICKR IMAGE
+				</Modal>
+			)}
 		</>
 	);
 }
 
-//미션 (2시 30분까기 고민)
-//자식 컴포넌트인 Modal안쪽에서 닫기 버튼 클릭시 부모에 있는 ModalOpen이라는 상태값을 false로 변경해서 모달창 닫는 로직 고민
-//리액트에서 데이터는 부모에서 자식으로 데이터를 전달할 수 있는 단방향 데이터 방식임을 유의
-//부모에서 Modal이란 컴포넌트에 어떤형태의 정보를 전달해야지 자식에서 해당 정보를 바탕으로 자기 자신을 언마운트 처리할지를 고민
+/*
+미션
+- 모달창 생성시 document.body.style.overflow='hidden'으로 처리해서 스크롤기능 비활성처리
+- 모달창 제거시 document.body.style.overflow='auto'로 처리해서 스크롤기능 다시 활성화
+*/
