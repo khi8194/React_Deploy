@@ -25,7 +25,7 @@ export default function Gallery() {
 			{/* <p>Gallery Page contents come here.</p> */}
 			<section className='galleryList'>
 				{Flickr.map((data, idx) => {
-					const imgUrl = `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_m.jpg`;
+					const imgUrl = `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`;
 
 					return (
 						<article key={idx}>
