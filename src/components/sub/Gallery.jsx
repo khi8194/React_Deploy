@@ -4,6 +4,8 @@ import Pic from '../common/Pic';
 import Modal from '../common/Modal';
 
 export default function Gallery() {
+	console.log('Gallery Component Rendered!!');
+
 	const [Flickr, setFlickr] = useState([]);
 	const [ModalOpen, setModalOpen] = useState(false);
 	//클릭한 목록요소의 순번을 담을 상태값 생성
@@ -34,20 +36,19 @@ export default function Gallery() {
 				<section className='galleryList'>
 					{Flickr.map((data, idx) => {
 						return (
-							// <article key={idx} onClick={() => {setModalOpen(true)}>
 							<article
 								key={idx}
 								onClick={() => {
+									//해당 요소 클릭시마다 핸들러함수 안쪽에서 ModalOpen, Index라는 2개의 상태값이 동시에 변경이 되지만
+									//실제 컴포넌트는 한번만 재랜더링 됨
+									//->리엑트18이전가지는 AutoBatching 기능이 지원이 안돼서
+									//같은 랜더링 사이클에서 복수개의 상태값 변경시 변경되는 상태값의 개수만큼 재랜더링됨.
+
+									//리액트18버전부터는 AutoBatching(자동묶어줌) 기능 지원됨
+									//특정 랜더링 사이클에서 복수개의 상태값이 변경되더라도 해당 상태값들을 Batching(그룹화)처리해 한번만 재랜더링 처리
 									setModalOpen(true);
-									//각 이미지 목록 클릭시 클릭한 idx순번값을 Index상태값에 저장
 									setIndex(idx);
 								}}>
-								{/*<article
-								key={idx}
-								onClick={() => {
-									setIndex(`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`);
-									setModalOpen(true);
-								}}>*/}
 								<Pic
 									src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
 									className='pic'
@@ -60,21 +61,14 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			{/* {ModalOpen && (<Modal setModalOpen={setModalOpen} do>FLICKR IMAGE</Modal>)} */}
 			{ModalOpen && (
 				<Modal setModalOpen={setModalOpen}>
 					<Pic
-						//Pic컴포넌트 src값으로 Flickr전체 배열에서 Index상태 순번의 정보값으로 _b 접미사의 큰 이미지 주소를 Pic에 전달해서 호출
 						src={`https://live.staticflickr.com/${Flickr[Index].server}/${Flickr[Index].id}_${Flickr[Index].secret}_b.jpg`}
 						shadow
 					/>
 				</Modal>
 			)}
-			{/* {ModalOpen && (
-				<Modal setModalOpen={setModalOpen} do>
-					<img src={Index} alt='Selected' />
-				</Modal>
-			)} */}
 		</>
 	);
 }
