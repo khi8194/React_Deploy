@@ -13,10 +13,16 @@
 		width: 100%;
 		height: 100%;
 
-		img {
+		div {
 			width: 100%;
 			height: 100%;
 			object-fit: contain; // 여백있어도 전체가 보이도록
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain !important;
+			}
 		}
 	}
 
