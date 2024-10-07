@@ -35,7 +35,6 @@ export default function Youtube() {
 			{Vids.map((vid, idx) => {
 				return (
 					<article key={idx}>
-						{/* <h3>{shortenText(vid.snippet.title, 60)}</h3> */}
 						<h3>
 							<Link to={'/youtube/' + vid.id}>{shortenText(vid.snippet.title, 60)}</Link>
 						</h3>
