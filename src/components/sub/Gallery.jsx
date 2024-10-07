@@ -44,7 +44,8 @@ export default function Gallery() {
 			</Layout>
 
 			{/* ModalOpen 상태값이 true일때에만 Modal컴포넌트를 호출해서 출력 */}
-			{ModalOpen && <Modal>FLICKR IMAGE</Modal>}
+			{/* 자식 컴포넌트인 모달 안쪽에서 부모인 ModalOpen상태값을 변경해야 되기 때문에 상태변경함수 자체를 전달 */}
+			{ModalOpen && <Modal setModalOpen={setModalOpen}>FLICKR IMAGE</Modal>}
 		</>
 	);
 }
