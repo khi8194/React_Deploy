@@ -4,14 +4,15 @@ import { useEffect, useState } from 'react';
 import UseCombineText from '../../../hooks/useCombineText';
 
 export default function YoutubeDetail() {
-	//해당 컴포넌트 2번 재랜더링됨
-	//YoubutVid상태값이 null상태로 렌더링되고 그때 fecthing가 받아온 데이터를 해당 상태에 담아주면서 2차 렌더링 발생
+	console.log('detail');
+
 	const { id } = useParams();
 	const [YoutubeVid, setYoutubeVid] = useState(null);
 	const combineText = UseCombineText();
-	// console.log(YoutubeVid);
 
 	useEffect(() => {
+		console.log('detail func');
+
 		const api_key = import.meta.env.VITE_YOUTUBE_API;
 		const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
 
@@ -39,13 +40,13 @@ export default function YoutubeDetail() {
 }
 
 /*
-  자가진단 항목
-  1. useState를 이용해서 state에 값을 옮겨담고 state변경함수로 state값 변경처리
-  2. useEffect구문의 구조를 파악하고 의존성 배열의 역할
-  3. useState와 useEffect를 활용해서 서버 데이터 fetching처리후 state에 담기
-  4. 다이나믹 라우터를 이용해서  /youtube/:id를 활용해서 상세페이지에 특정 id값 전달하는 방법
-  5. 상태값에 있는 객체를 불러올떄 ?. 형태로 옵셔녈 체이닝을 처리하는 이유
-  6. 커스텀훅 만드는 방법  (선택사항)
-  7. useShortenText 커스텀훅 사용방법 (선택사항)
-  8. useCombineText 커스텀훅 사용방법 (선택사항)
+	동적 라우터 (Dynamic Router) 
+	- 상세페이지 같은 컨텐츠를 출력해야 될때 각각의 상세페이지 컨텐츠에 대응되는 컴포넌트를 만드는 것은 비효율적
+	-  /:id 같은 형식으로 특정 URL 뒤에 값을 비어있는 상세페이지 컴포넌트에 전달
+	- 상세 페이지 컴포넌트에서는 id값을 useParams() 훅을 통해 전달 받음
+	- 이렇게 전달받은 고유 id 값을 이용해서 새롭게 상세 페이지 전용 데이터를 요청해서 받은 뒤 출력하는 형식
+	동적 라우터를 확인해야 되는 컴포넌트 순서
+	1. App.jsx에서 동적 라우터 패턴 확인 (:파라미터명)
+	2. Youtube.jsx에서 클릭한 요소의 Link에 적용되어있는 이동 URL 확인
+	3. YoutubeDetail.jsx에서 useParams()훅 호출한 뒤, 전달된 id값을 추출하고 해당 id값을 활용한 상세페이지 전용 컨텐츠 데이터 요청
 */
