@@ -22,7 +22,16 @@ export default function Gallery() {
 
 	return (
 		<Layout title={'GALLERY'}>
-			<p>Gallery Page contents come here.</p>
+			{/* <p>Gallery Page contents come here.</p> */}
+			<section className='galleryList'>
+				{Flickr.map((data, idx) => {
+					return (
+						<article key={idx}>
+							<h3>{data.title}</h3>
+						</article>
+					);
+				})}
+			</section>
 		</Layout>
 	);
 }
