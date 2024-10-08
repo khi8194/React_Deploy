@@ -10,13 +10,17 @@ main {
 
 		span {
 			opacity: 0;
-			transform: scale(3) rotate(220deg);
+			transform: scale(3);
+			// transform: scale(3) rotate(220deg);
+			//transform 중심축 변경으로 모션 variation 가능
+			transform-origin: 200px 200px;
 		}
 	}
 	h1.on {
 		span {
 			opacity: 1;
-			transform: scale(1) rotate(0deg);
+			transform: scale(1);
+			// transform: scale(1) rotate(0deg);
 		}
 	}
 }
