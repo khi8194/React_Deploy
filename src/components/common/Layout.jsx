@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Layout({ title, children }) {
 	const { pathname } = useLocation();
@@ -7,7 +8,14 @@ export default function Layout({ title, children }) {
 
 	return (
 		<main className={isDetail ? 'detail' : title.toLowerCase()}>
-			<h1>{title}</h1>
+			<motion.h1
+				initial={{ x: -200, opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				exit={{ scale: 2, opacity: 0, transition: { duration: 0.3 } }}
+				transition={{ duration: 1, ease: 'easeIn' }}>
+				{title}
+			</motion.h1>
+			{/* <h1>{title}</h1> */}
 
 			<section>{children}</section>
 		</main>
