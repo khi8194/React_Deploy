@@ -1,7 +1,7 @@
 import Layout from '../common/Layout';
 import memberData from '../../data/memberData';
 import Pic from '../common/Pic';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 /*
 참조객체에 가상돔을 담아 활용하는 패턴
@@ -11,23 +11,19 @@ import { useRef } from 'react';
 */
 
 export default function Members() {
-	//useRef를 통해서 초기값이 null이 있는 빈 참조 객체를 생성
-	const pEl = useRef(null);
-	console.log(pEl);
+	console.log('Member rendered!!');
 
-	//h2가상돔 요소 클릭
-	const changeColor = () => {
-		console.log(pEl);
+	const refEl = useRef(0);
+	const [Num, setNum] = useState(0);
 
-		//changeColor함수가 호출되는 순간 가상돔요소를 찾는 것이 아닌
-		//이전 랜더링 사이클때 변환된 리얼돔을 직접 가져와서 스타일 변경
-		//이처럼 가상돔이 아닌 이전 랜더링 타임에 생성된 리얼돔을 직접 제어하면 안되는 이유
-		//문제점1: (리액트에서 중요한 정보로 취급하는) state와 연관이 없는 일반 DOM요소를 제어하기 때문에 추후 데이터 추적 불가능
-		//문제점2: 현재 랜더링 사이클에서 다루고 있는 최신 요소가 아닌 이전 랜더링때 생성된 요소를 다루기 때문에 잘못된 예전 데이터를 다루게 됨
-		// const pEl = document.querySelector('.titBox p');
-		// pEl.style.color = 'red';
-		//참조객체의 가상돔을 제어하면 현재 랜더링 사이클의 최신 가상돔 정보를 제어 가능
-		pEl.current.style.color = 'red';
+	const changeRef = () => {
+		console.log('changeRef called!!');
+		refEl.current = 1;
+	};
+
+	const changeState = () => {
+		console.log('changeState called!!');
+		setNum(Num + 1);
 	};
 
 	return (
@@ -42,12 +38,9 @@ export default function Members() {
 
 			<article className='memberListBox'>
 				<div className='titBox'>
-					<h2 onClick={changeColor}>Our Team Member</h2>
-					{/* <h2>Our Team Member</h2> */}
+					<h2 onClick={changeRef}>Our Team Member</h2>
 
-					{/* 미리 생성한 빈 참조객체에 담고 싶은 가상돔요소에 ref속성으로 연결 */}
-					{/* <p> */}
-					<p ref={pEl}>
+					<p onClick={changeState}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iste accusantium! Eum corrupti voluptates
 						natus! Harum dolorum reprehenderit modi nostrum?
 					</p>
@@ -81,3 +74,19 @@ export default function Members() {
 		</Layout>
 	);
 }
+
+/*
+state
+-컴포넌트가 재랜더링 되더라도 값이 사라지지 않고 계속 유지 (이전값을 기억하면서 재활용가능)
+-해당값이 변경되면 자동으로 컴포넌트가 재랜더링됨
+-사용예: JSX뱐호와 관련된 모든값은 state에 담아줌, 서버데이터, 모달을 열기위한 불린값, 목록클릭시 변경되야 되는 순서값
+
+useRef
+-컴포넌트가 재랜더링 되더라도 값이 사라지지 않고 계속 유지 (이전값을 기억하면서 재활용가능)
+-해당값이 변경되더라도 컴포넌트를 재랜더링시키지 않음
+-사용예1: 화면의 랜더링과 직접적인 연관은 없지만 로직활용시 유지되야되는 값
+-사용예2: 브라우저 리사이즈시 갱신되야되는 브라우저의 폭, 스크롤시 갱신해야 되는 현재 스크롤 위치
+
+컴포넌트 함수가 재랜더링(재호출)되더라도 State와 useRef의 값을 기억할 수 있는 이유 
+-자바스크립트 lexical scope가 클로저(closure)환경을 기반으로 하고 있기 때문 
+*/
