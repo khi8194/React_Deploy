@@ -2,10 +2,11 @@ import { useLocation } from 'react-router-dom';
 import useSplitText from '../../hooks/useSplitText';
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import MaskText from './MaskText';
 
 export default function Layout({ title, children }) {
 	const ref_title = useRef(null);
-	const ref_slogan = useRef(null);
+	// const ref_slogan = useRef(null); //MaskText.jsx생성 후 제거
 
 	const splitText = useSplitText();
 	const { pathname } = useLocation();
@@ -18,17 +19,22 @@ export default function Layout({ title, children }) {
 		// splitText(ref_title, { interval: 0.1, delay: 3 });
 		// splitText(ref_title, { interval: 0.1, delay: 0.9 });
 		splitText(ref_title, { interval: 0.1 });
-		ref_slogan.current.classList.add('on');
+		// ref_slogan.current.classList.add('on'); //MaskText.jsx생성 후 제거
 	}, []);
 
 	return (
 		<main className={isDetail ? 'detail' : title.toLowerCase()}>
 			<h1 ref={ref_title}>{title}</h1>
 
+			{/* 
 			<div className='slogan' ref={ref_slogan}>
-				<span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, voluptate?</span>
-				<div className='mask'></div>
-			</div>
+			<span>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!
+			</span>
+			<div className='mask'></div>
+			</div> 
+			*/}
+			<MaskText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!</MaskText>
 
 			{/* <section>{children}</section> */}
 			<motion.section initial={{ opacity: 0, y: 200 }} animate={{ opacity: 1, y: 0 }} exit={{}} transition={{}}>
