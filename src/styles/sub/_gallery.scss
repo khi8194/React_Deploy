@@ -1,6 +1,7 @@
 .gallery {
 	.galleryList {
 		width: 100%;
+		// min-height: 100vh;  //_layout.scss에 적용
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
