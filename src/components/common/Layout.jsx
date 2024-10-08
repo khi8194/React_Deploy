@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 
 export default function Layout({ title, children }) {
 	const ref_title = useRef(null);
+	const ref_slogan = useRef(null);
+
 	const splitText = useSplitText();
 	const { pathname } = useLocation();
 	const isDetail = pathname.includes('/youtube/');
@@ -14,13 +16,19 @@ export default function Layout({ title, children }) {
 		// splitText(ref_title, 0.1, 2);
 		// splitText(ref_title, 0.1, 1.15);
 		// splitText(ref_title, { interval: 0.1, delay: 3 });
-		splitText(ref_title, { interval: 0.1, delay: 0.9 });
-		// splitText(ref_title, { interval: 0.1 });
+		// splitText(ref_title, { interval: 0.1, delay: 0.9 });
+		splitText(ref_title, { interval: 0.1 });
+		ref_slogan.current.classList.add('on');
 	}, []);
 
 	return (
 		<main className={isDetail ? 'detail' : title.toLowerCase()}>
 			<h1 ref={ref_title}>{title}</h1>
+
+			<div className='slogan' ref={ref_slogan}>
+				<span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, voluptate?</span>
+				<div className='mask'></div>
+			</div>
 
 			{/* <section>{children}</section> */}
 			<motion.section initial={{ opacity: 0, y: 200 }} animate={{ opacity: 1, y: 0 }} exit={{}} transition={{}}>
@@ -29,3 +37,8 @@ export default function Layout({ title, children }) {
 		</main>
 	);
 }
+
+/*
+slogan프레임이 활성화되면(on클래스 불으면) 마스크박스가 왼쪽 밖에서 오른쪽 밖으로 1초동안 등속이동
+마스크가 절반이동한 시점인 0.5초 시점에 span 텍스트를 보임처리
+*/
