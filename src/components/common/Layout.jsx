@@ -34,9 +34,16 @@ export default function Layout({ title, children }) {
 			<div className='mask'></div>
 			</div> 
 			*/}
-			<MaskText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!</MaskText>
+			<MaskText duration={1} delay={0} color={'#000'} style={{ fontFamily: 'raleway' }}>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!
+			</MaskText>
 			<br />
-			<MaskText>Lorem ipsum dolor</MaskText>
+			{/* <MaskText duration={0.6} delay={1} color={'green'} fontFamily={'raleway'}>
+				Lorem ipsum dolor
+			</MaskText> */}
+			<MaskText duration={0.6} delay={1} color={'green'} style={{ marginTop: 50, fontSize: 80, fontFamily: 'raleway' }}>
+				Lorem ipsum dolor
+			</MaskText>
 
 			{/* <section>{children}</section> */}
 			<motion.section
