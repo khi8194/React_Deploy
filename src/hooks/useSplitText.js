@@ -1,14 +1,19 @@
 export default function useSplitText() {
 	//내부적으로 current값을 직접 추출하기때문에 호출시 참조객체명만 전달
-	return ref => {
+	return (ref, interval = 0) => {
 		//인수로 전달받은 참조객체안의 요소의 텍스트만 가져옴
 		let text = ref.current.innerText;
 		//동적으로 생성될 태그문자열이 담길 빈 변수 생성
 		let tags = '';
+		let count = 0;
 
 		//문자열을 반복돌면서 동적으로 <span>으로 감싸면서 문자열 쌓아나감
 		for (let letter of text) {
-			tags += `<span style='display:inline-block; transition-duration:0.5s;'>${letter}</span>`;
+			tags += `
+      <span style='display:inline-block; transition-duration:0.5s; transition-delay:${count * interval}s'>
+        ${letter}
+      </span>`;
+			count++;
 		}
 
 		//tag문자열이 완성되면 ref참조 요소 안쪽에 변경된 문자열 DOM구조 바꿔치기
@@ -29,3 +34,5 @@ export default function useSplitText() {
   실제 동적으로 DOM이 최종 생성된 시점 이후를 보장하진 않기 때문에
   물리적으로 실제 돔으로 변환될 약간의 시간을 확보하기 위함
 */
+
+//미션 - 리턴되는 함수의 2번째 파라미터로 interval 시간값을 추가해서, 각각의 span요소에 interval만큼의 transition-delay적용
