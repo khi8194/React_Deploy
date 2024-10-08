@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import MaskText from './MaskText';
 
 export default function Layout({ title, children }) {
+	//커스텀훅으로 핸들러함수 안쪽에서 호출할 수 있는 실제사용가능한 함수 반환 받음
 	const ref_title = useRef(null);
 	// const ref_slogan = useRef(null); //MaskText.jsx생성 후 제거
 
@@ -20,6 +21,10 @@ export default function Layout({ title, children }) {
 		// splitText(ref_title, { interval: 0.1, delay: 0.9 });
 		splitText(ref_title, { interval: 0.1 });
 		// ref_slogan.current.classList.add('on'); //MaskText.jsx생성 후 제거
+		// useEffect에 의존성 배열에 특정 값을 등록하라고 뜨는 경우
+		// 해당 컴포넌트자제척으로 제어되지 않은 요소가 useEffect안쪽에서 활용되고 있을 때 등록하라는 권공 사항 출력
+		// 해결방법 : 등록 처리(잘못등록하면 재귀적호출 되면서 무한 호출문제)
+		// 무한호출시 해결방법:useMemo, useCallback등의 메모리제이션 훅을 이용해서 강제로 메모리에 등록 후 사용
 	}, []);
 
 	return (
