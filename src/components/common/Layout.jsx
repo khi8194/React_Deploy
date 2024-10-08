@@ -11,7 +11,8 @@ export default function Layout({ title, children }) {
 			<motion.h1
 				initial={{ x: -200, opacity: 0 }}
 				animate={{ x: 0, opacity: 1 }}
-				exit={{ scale: 2, opacity: 0, transition: { duration: 0.3 } }}
+				// exit={{ scale: 2, opacity: 0, transition: { duration: 0.3 } }}
+				exit={{ x: -200, opacity: 0, transition: { duration: 0.3 } }}
 				transition={{ duration: 1, ease: 'easeIn' }}>
 				{title}
 			</motion.h1>
