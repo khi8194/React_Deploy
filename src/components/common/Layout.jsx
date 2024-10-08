@@ -35,6 +35,8 @@ export default function Layout({ title, children }) {
 			</div> 
 			*/}
 			<MaskText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!</MaskText>
+			<br />
+			<MaskText>Lorem ipsum dolor</MaskText>
 
 			{/* <section>{children}</section> */}
 			<motion.section

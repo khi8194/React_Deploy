@@ -11,7 +11,8 @@ export default function MaskText({ children }) {
 		display: 'inline-block',
 		position: 'relative',
 		overflow: 'hidden',
-		marginBottom: 80
+		// marginBottom: 80
+		marginBottom: 20
 	};
 	// const conStyle = {
 	// 	opacity: 0,
