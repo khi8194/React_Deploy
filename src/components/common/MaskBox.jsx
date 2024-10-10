@@ -44,6 +44,7 @@ export default function Layout({ title, children }) {
 }
 */
 import { motion } from 'framer-motion';
+import Mask from './Mask';
 
 export default function MaskBox({ children, duration = 0.5, delay = 0, color = '#000', style }) {
 	//styles
@@ -95,6 +96,8 @@ export default function MaskBox({ children, duration = 0.5, delay = 0, color = '
 				initial={{ x: '-101%' }}
 				animate={{ x: '101%' }}
 				transition={{ duration, delay, ease: 'linear' }}></motion.div>
+
+			<Mask duration={duration} delay={delay} color={color} />
 		</div>
 	);
 }
