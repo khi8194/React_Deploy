@@ -1,3 +1,4 @@
+/*
 import { useLocation } from 'react-router-dom';
 import useSplitText from '../../hooks/useSplitText';
 import { useEffect, useRef } from 'react';
@@ -39,5 +40,47 @@ export default function Layout({ title, children }) {
 				{children}
 			</motion.section>
 		</main>
+	);
+}
+*/
+import { motion } from 'framer-motion';
+
+export default function MaskBox({ children, duration = 0.5, delay = 0, color = '#000', style }) {
+	//기본 스타일 객체
+	//외부 스타일 파일로 스타일 지정하면 해당 컴포넌트를 범용적으로 사용하기 번거로움
+	//이러한 문제점을 개선하기 위해 대안책 (tailwindCSS, styleComponent, 스타일 객체를 직접 내부에 생성)
+	const frameStyle = {
+		display: 'inline-block',
+		position: 'relative',
+		overflow: 'hidden'
+	};
+	const maskStyle = {
+		width: '100%',
+		height: '100%',
+		position: 'absolute',
+		top: 0,
+		backgroundColor: color
+	};
+
+	return (
+		//텍스트를 감싸주는 Wrapper
+		<div style={{ ...frameStyle, ...style }}>
+			{/* children으로 전달된 실제 텍스트를 span으로 전달된 요소 */}
+			<motion.div
+				style={{ width: '100%', height: '100%' }}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				exit={{ opacity: 0, transition: { delay: 0 } }}
+				transition={{ duration: 0.01, delay: duration / 2 + delay }}>
+				{children}
+			</motion.div>
+
+			{/* wrapper 안쪽에 실제 텍스트를 가져줄 마스크 요소 */}
+			<motion.div
+				style={maskStyle}
+				initial={{ x: '-101%' }}
+				animate={{ x: '101%' }}
+				transition={{ duration, delay, ease: 'linear' }}></motion.div>
+		</div>
 	);
 }
