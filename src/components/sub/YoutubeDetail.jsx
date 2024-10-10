@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '../common/Layout';
 import { useEffect, useState } from 'react';
 import UseCombineText from '../../hooks/useCombineText';
+import Content from '../common/Content';
 
 export default function YoutubeDetail() {
 	console.log('detail');
@@ -11,7 +12,7 @@ export default function YoutubeDetail() {
 	const combineText = UseCombineText();
 
 	useEffect(() => {
-		console.log('detail func');
+		// console.log('detail func');
 
 		const api_key = import.meta.env.VITE_YOUTUBE_API;
 		const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
@@ -25,16 +26,18 @@ export default function YoutubeDetail() {
 
 	return (
 		<Layout title={YoutubeVid?.snippet.title}>
-			<figure className='vidFrame'>
-				<iframe
-					width='100%'
-					height='100%'
-					title='youtube'
-					src={`https://www.youtube.com/embed/${YoutubeVid?.snippet.resourceId.videoId}`}></iframe>
-			</figure>
+			<Content delay={1}>
+				<figure className='vidFrame'>
+					<iframe
+						width='100%'
+						height='100%'
+						title='youtube'
+						src={`https://www.youtube.com/embed/${YoutubeVid?.snippet.resourceId.videoId}`}></iframe>
+				</figure>
 
-			<p>{YoutubeVid?.snippet.resourceId.videoId}</p>
-			<span>{combineText(YoutubeVid?.snippet.publishedAt.split('T')[0], '-', '.')}</span>
+				<p>{YoutubeVid?.snippet.resourceId.videoId}</p>
+				<span>{combineText(YoutubeVid?.snippet.publishedAt.split('T')[0], '-', '.')}</span>
+			</Content>
 		</Layout>
 	);
 }

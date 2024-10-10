@@ -38,8 +38,8 @@ export default function Members() {
 						<p>{memberData[0].position}</p>
 					</div>
 
-					{/* <MaskBox style={{ width: '50%', height: '65vh' }} delay={2}> */}
-					<MaskBox style={{ width: '50%', height: '65vh' }} delay={2 + 1.5}>
+					<MaskBox style={{ width: '50%', height: '65vh' }} delay={1}>
+						{/* <MaskBox style={{ width: '50%', height: '65vh' }} delay={2 + 1.5}> */}
 						<Pic style={{ width: '100%', height: '100%' }} src={'/' + memberData[0].pic} />
 					</MaskBox>
 				</article>
