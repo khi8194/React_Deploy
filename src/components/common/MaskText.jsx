@@ -1,7 +1,7 @@
 // import { motion, transform } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-export default function MaskText({ children, duration, delay, color, style }) {
+export default function MaskText({ children, duration = 0.5, delay = 0, color = '#000', style }) {
 	//component styles
 	//기본 스타일 객체
 	//외부 스타일 파일로 스타일 지정하면 해당 컴포넌트를 범용적으로 사용하기 번거로움

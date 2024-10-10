@@ -2,6 +2,7 @@ import Layout from '../common/Layout';
 import memberData from '../../data/memberData';
 import Pic from '../common/Pic';
 import { useRef, useState } from 'react';
+import MaskBox from '../common/MaskBox';
 
 /*
 참조객체에 가상돔을 담아 활용하는 패턴
@@ -33,7 +34,13 @@ export default function Members() {
 					<h2>{memberData[0].name}</h2>
 					<p>{memberData[0].position}</p>
 				</div>
-				<Pic className='pic' src={'/' + memberData[0].pic} shadow />
+				{/* <Pic className='pic' src={'/' + memberData[0].pic} shadow /> */}
+
+				{/* MaskBox 안쪽에 Pic요소가 들어갈 경우 shadow속성 적용 불가: Mask frame자체가 내부 요소를 overflow:hidden 처리하기 때문 */}
+				<MaskBox style={{ width: '50%', height: '65vh' }} delay={1}>
+					{/* 직접 style객체를 props로 전달하여 불필요한 scss구문 추가 없이 스타일 적용 */}
+					<Pic style={{ width: '100%', height: '100%' }} src={'/' + memberData[0].pic} />
+				</MaskBox>
 			</article>
 
 			<article className='memberListBox'>
