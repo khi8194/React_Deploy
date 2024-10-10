@@ -1,9 +1,8 @@
-// import { useEffect, useState } from 'react';
+// import { motion, transform } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-// export default function MaskText({ children, duration = 0 }) {
 export default function MaskText({ children, duration, delay, color, style }) {
-	// const [Mounted, setMounted] = useState(false);
+	//component styles
 	//기본 스타일 객체
 	//외부 스타일 파일로 스타일 지정하면 해당 컴포넌트를 범용적으로 사용하기 번거로움
 	//이러한 문제점을 개선하기 위해 대안책 (tailwindCSS, styleComponent, 스타일 객체를 직접 내부에 생성)
@@ -11,19 +10,12 @@ export default function MaskText({ children, duration, delay, color, style }) {
 		fontSize: '1.2rem',
 		fontFamily: 'orbitron',
 		color: color,
-		// color: '#555',
 		display: 'inline-block',
 		position: 'relative',
 		overflow: 'hidden',
-		// marginBottom: 80
 		// marginBottom: 20
 		marginBottom: 10
 	};
-	// const conStyle = {
-	// 	opacity: 0,
-	// 	transitionDuration: '0.1s',
-	// 	transitionDelay: '0.3s'
-	// };
 	const maskStyle = {
 		width: '100%',
 		height: '100%',
@@ -33,65 +25,47 @@ export default function MaskText({ children, duration, delay, color, style }) {
 		// backgroundColor: '#555'
 	};
 
-	// //con, mask의 활성화 스타일 객체
-	// const conStyleActive = { ...conStyle, opacity: 1 };
-	// const maskStyleActive = { ...maskStyle, left: '100%' };
-
-	// useEffect(() => {
-	// 	setTimeout(() => {
-	// 		setMounted(true);
-	// 	}, 1000);
-	// }, []);
-
-	/*
-	return (
-		<div className='slogan' style={frameStyle}>
-			<span style={Mounted ? conStyleActive : conStyle}>{children}</span>*/
-	{
-		/* <div className='mask'></div> */
-	} /*
-					<div style={Mounted ? maskStyleActive : maskStyle}></div>
-				</div>
-			);*/
+	//motion options
+	const spanMotion = {
+		in: { opacity: 0 },
+		on: { opacity: 1 },
+		out: { opacity: 0, transition: { delay: 0 } },
+		time: { duration: 0.01, delay: duration / 2 + delay }
+	};
+	const maskMotion = {
+		in: { x: '-101%' },
+		on: { x: '101%' },
+		time: { duration, delay }
+	};
 
 	return (
-		// <div style={frameStyle}>
 		// 텍스트를 감싸주는 Wrapper
 		// 해당 모션 컴포넌트의 스타일을 부모컴포넌트에 호출시 편하게 변경처리 하기 위해서 전달받는 style 객체로 기존 style객체 덮어씀
 		<div style={{ ...frameStyle, ...style }}>
 			{/* children으로 전달된 실제 텍스트를 span으로 전달된 요소 */}
-			<motion.span
+			{/* <motion.span
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0, transition: { delay: 0 } }}
-				// transition={{ duration: 0.01, delay: 0.3 }}>
-				// transition={{ duration: 0.01, delay: duration / 2 }}>
 				transition={{ duration: 0.01, delay: duration / 2 + delay }}>
+				{children}
+			</motion.span> */}
+			<motion.span variants={spanMotion} initial='in' animate='on' exit='out' transition={spanMotion.time}>
 				{children}
 			</motion.span>
 
-			<motion.div
+			{/* <motion.div
 				style={maskStyle}
-				// initial={{ x: '-100%' }}
-				// animate={{ x: '100%' }}
 				initial={{ x: '-101%' }}
 				animate={{ x: '101%' }}
-				// transition={{ duration: 0.6 }}></motion.div>
-				transition={{ duration, delay }}></motion.div>
+				transition={{ duration, delay }}>
+			</motion.div> */}
+			<motion.div
+				style={maskStyle}
+				variants={maskMotion}
+				initial='in'
+				animate='on'
+				transition={maskMotion.time}></motion.div>
 		</div>
 	);
 }
-
-/*
-  미션
-  다음의 불편한 점을 개선하기 위한 props 설정
-  - 컴포넌트 호출시 마스크 모션시간 제어
-  - 컴포넌트 호출시 마스크 모션이 시작되기까지의 지연시간 제어
-  - 마스크색상값도 지정 가능
-  - 마스크색상값 텍스트 색상값 연동
-  - 글자크기, 글꼴 마진 값등 자잘한 스타일을 호출시에 적용 가능
-*/
-/*
-  미션 (4시 30분까지)
-  - 글자크기, 글꼴, 마진 값등 자잘한 스타일을 호출시에 적용가능
-*/
