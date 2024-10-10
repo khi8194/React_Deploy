@@ -1,3 +1,4 @@
+/*
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 
@@ -22,6 +23,18 @@ export default function Contact() {
 					</article>
 				);
 			})}
+		</Layout>
+	);
+}
+*/
+
+import Layout from '../common/Layout';
+import Content from '../common/Content';
+
+export default function Contact() {
+	return (
+		<Layout title={'CONTACT'}>
+			<Content delay={1}></Content>
 		</Layout>
 	);
 }

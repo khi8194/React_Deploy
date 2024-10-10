@@ -4,6 +4,7 @@ import Pic from '../common/Pic';
 import { useRef, useState } from 'react';
 import MaskBox from '../common/MaskBox';
 import MaskText from '../common/MaskText';
+import Content from '../common/Content';
 
 export default function Members() {
 	console.log('Member rendered!!');
@@ -29,55 +30,56 @@ export default function Members() {
 				Lorem ipsum dolor
 			</MaskText>
 
-			<article className='ceoBox'>
-				<div className='txt'>
-					<h2>{memberData[0].name}</h2>
-					<p>{memberData[0].position}</p>
-				</div>
-				{/* <Pic className='pic' src={'/' + memberData[0].pic} shadow /> */}
+			{/* <Content> */}
+			<Content delay={1}>
+				<article className='ceoBox'>
+					<div className='txt'>
+						<h2>{memberData[0].name}</h2>
+						<p>{memberData[0].position}</p>
+					</div>
 
-				{/* MaskBox 안쪽에 Pic요소가 들어갈 경우 shadow속성 적용 불가: Mask frame자체가 내부 요소를 overflow:hidden 처리하기 때문 */}
-				<MaskBox style={{ width: '50%', height: '65vh' }} delay={2}>
-					{/* 직접 style객체를 props로 전달하여 불필요한 scss구문 추가 없이 스타일 적용 */}
-					<Pic style={{ width: '100%', height: '100%' }} src={'/' + memberData[0].pic} />
-				</MaskBox>
-			</article>
+					{/* <MaskBox style={{ width: '50%', height: '65vh' }} delay={2}> */}
+					<MaskBox style={{ width: '50%', height: '65vh' }} delay={2 + 1.5}>
+						<Pic style={{ width: '100%', height: '100%' }} src={'/' + memberData[0].pic} />
+					</MaskBox>
+				</article>
 
-			<article className='memberListBox'>
-				<div className='titBox'>
-					<h2 onClick={changeRef}>Our Team Member</h2>
+				<article className='memberListBox'>
+					<div className='titBox'>
+						<h2 onClick={changeRef}>Our Team Member</h2>
 
-					<p onClick={changeState}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iste accusantium! Eum corrupti voluptates
-						natus! Harum dolorum reprehenderit modi nostrum?
-					</p>
-				</div>
+						<p onClick={changeState}>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iste accusantium! Eum corrupti
+							voluptates natus! Harum dolorum reprehenderit modi nostrum?
+						</p>
+					</div>
 
-				<ul>
-					{memberData.map((member, idx) => {
-						if (idx !== 0) {
-							return (
-								<li key={idx}>
-									<Pic src={member.pic} className='pic' shadow={true} />
-									<div className='txt'>
-										<h2>{member.name}</h2>
-										<p>{member.position}</p>
-									</div>
-								</li>
-							);
-						}
-					})}
-				</ul>
+					<ul>
+						{memberData.map((member, idx) => {
+							if (idx !== 0) {
+								return (
+									<li key={idx}>
+										<Pic src={member.pic} className='pic' shadow={true} />
+										<div className='txt'>
+											<h2>{member.name}</h2>
+											<p>{member.position}</p>
+										</div>
+									</li>
+								);
+							}
+						})}
+					</ul>
 
-				<div className='descBox'>
-					<h2>Lorem ipsum dolor sit.</h2>
-					<p>
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. A esse cupiditate, vitae deleniti repellat
-						explicabo sit, corrupti beatae dicta, nulla optio corporis alias. Perferendis quidem sapiente minima,
-						quisquam inventore soluta.
-					</p>
-				</div>
-			</article>
+					<div className='descBox'>
+						<h2>Lorem ipsum dolor sit.</h2>
+						<p>
+							Lorem ipsum, dolor sit amet consectetur adipisicing elit. A esse cupiditate, vitae deleniti repellat
+							explicabo sit, corrupti beatae dicta, nulla optio corporis alias. Perferendis quidem sapiente minima,
+							quisquam inventore soluta.
+						</p>
+					</div>
+				</article>
+			</Content>
 		</Layout>
 	);
 }
