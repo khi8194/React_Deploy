@@ -1,6 +1,8 @@
+import emailjs from '@emailjs/browser';
 import { useRef } from 'react';
 
 export default function MailForm() {
+	const ref_form = useRef(null);
 	const ref_name = useRef(null);
 	const ref_email = useRef(null);
 	const ref_msg = useRef(null);
@@ -13,7 +15,16 @@ export default function MailForm() {
 	//전송 버튼 클릭시 실행될 함수
 	const sendForm = e => {
 		e.preventDefault();
-		resetForm();
+		// resetForm();
+		emailjs
+			.sendForm(import.meta.env.VITE_SERVICE_KEY, import.meta.envVITE_TEMPLATE_KEY, ref_form.current, {
+				publicKey: import.meta.env.VITE_PRIMARY_KEY
+			})
+			.then(res => {
+				alert('문의내용이 관리자에 전달되었습니다.');
+				console.log(res);
+				resetForm();
+			});
 	};
 
 	return (
@@ -21,7 +32,8 @@ export default function MailForm() {
 			<div className='formBox'>
 				{/* <form> */}
 				{/* form에 전송 이벤트 연결 */}
-				<form onSubmit={sendForm}>
+				{/* <form onSubmit={sendForm}> */}
+				<form onSubmit={sendForm} ref={ref_form}>
 					{/* 문의자이름, 메일주소 입력받는 상단 영역 */}
 					<div className='upper'>
 						<span>
@@ -32,7 +44,8 @@ export default function MailForm() {
 						<span>
 							<label htmlFor='uMail'>E-Mail</label>
 							{/* <input type='text' id='uMail' placeholder='Leave your email' /> */}
-							<input ref={ref_email} type='text' id='uMail' placeholder='Leave your email' />
+							{/* <input ref={ref_email} type='text' id='uMail' placeholder='Leave your email' /> */}
+							<input ref={ref_email} name='user_email' type='text' id='uMail' placeholder='Leave your email' />
 						</span>
 					</div>
 
@@ -40,7 +53,8 @@ export default function MailForm() {
 					<div className='lower'>
 						<label htmlFor='msg'>Message</label>
 						{/* <textarea name='msg' id='msg' placeholder='Leave your message'></textarea> */}
-						<textarea ref={ref_msg} name='msg' id='msg' placeholder='Leave your message'></textarea>
+						{/* <textarea ref={ref_msg} name='msg' id='msg' placeholder='Leave your message'></textarea> */}
+						<textarea ref={ref_msg} name='message' id='msg' placeholder='Leave your message'></textarea>
 					</div>
 
 					{/* 전송,취소 버튼 그룹 */}
