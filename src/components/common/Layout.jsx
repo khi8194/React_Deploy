@@ -3,6 +3,7 @@ import useSplitText from '../../hooks/useSplitText';
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import MaskText from './MaskText';
+import Mask from './Mask';
 
 export default function Layout({ title, children }) {
 	//커스텀훅으로 핸들러함수 안쪽에서 호출할 수 있는 실제사용가능한 함수 반환 받음
@@ -28,40 +29,46 @@ export default function Layout({ title, children }) {
 	}, []);
 
 	return (
-		<main className={isDetail ? 'detail' : title.toLowerCase()}>
-			<h1 ref={ref_title}>{title}</h1>
+		<>
+			<main className={isDetail ? 'detail' : title.toLowerCase()}>
+				<h1 ref={ref_title}>{title}</h1>
 
-			{/* 
-			<div className='slogan' ref={ref_slogan}>
-			<span>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!
-			</span>
-			<div className='mask'></div>
-			</div> 
-			*/}
-			{/* <MaskText duration={1} delay={0} color={'#000'} style={{ fontFamily: 'raleway' }}> */}
-			<MaskText duration={0.5} delay={0} color={'#444'} style={{ fontSize: 20, fontFamily: 'arial' }}>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!
-			</MaskText>
-			<br />
-			{/* <MaskText duration={0.6} delay={1} color={'green'} fontFamily={'raleway'}>
-				Lorem ipsum dolor
-			</MaskText> */}
-			{/* <MaskText duration={0.6} delay={1} color={'green'} style={{ marginTop: 50, fontSize: 80, fontFamily: 'raleway' }}> */}
-			<MaskText duration={0.5} delay={0.5} color={'#444'} style={{ marginBottom: 120 }}>
-				Lorem ipsum dolor
-			</MaskText>
+				{/* 
+				<div className='slogan' ref={ref_slogan}>
+				<span>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!
+				</span>
+				<div className='mask'></div>
+				</div> 
+				*/}
+				{/* <MaskText duration={1} delay={0} color={'#000'} style={{ fontFamily: 'raleway' }}> */}
+				<MaskText duration={0.5} delay={0} color={'#444'} style={{ fontSize: 20, fontFamily: 'arial' }}>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, nulla!
+				</MaskText>
+				<br />
+				{/* <MaskText duration={0.6} delay={1} color={'green'} fontFamily={'raleway'}>
+					Lorem ipsum dolor
+				</MaskText> */}
+				{/* <MaskText duration={0.6} delay={1} color={'green'} style={{ marginTop: 50, fontSize: 80, fontFamily: 'raleway' }}> */}
+				<MaskText duration={0.5} delay={0.5} color={'#444'} style={{ marginBottom: 120 }}>
+					Lorem ipsum dolor
+				</MaskText>
 
-			{/* <section>{children}</section> */}
-			<motion.section
-				initial={{ opacity: 0, y: 200 }}
-				animate={{ opacity: 1, y: 0 }}
-				exit={{ opacity: 0, y: 200, transition: { delay: 0 } }}
-				// transition={{ duration: 1, delay: 0.7 }}>
-				transition={{ duration: 1, delay: 0.7, ease: 'linear' }}>
-				{children}
-			</motion.section>
-		</main>
+				{/* <section>{children}</section> */}
+				<motion.section
+					initial={{ opacity: 0, y: 200 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: 200, transition: { delay: 0 } }}
+					// transition={{ duration: 1, delay: 0.7 }}>
+					transition={{ duration: 1, delay: 0.7, ease: 'linear' }}>
+					{children}
+				</motion.section>
+			</main>
+
+			{/* <Mask duration={0.5}/> */}
+			{/* 다른 요소와는 다르게 전체 페이지를 덮을 때에는 Mask요소가 브라우저를 기준으로 위치가 배치되어애 하므로 fixed 속성으로 변경 */}
+			<Mask style={{ position: 'fixed' }} />
+		</>
 	);
 }
 
