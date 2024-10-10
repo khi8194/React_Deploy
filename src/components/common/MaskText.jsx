@@ -1,5 +1,6 @@
 // import { motion, transform } from 'framer-motion';
 import { motion } from 'framer-motion';
+import Mask from './Mask';
 
 export default function MaskText({ children, duration = 0.5, delay = 0, color = '#000', style }) {
 	//component styles
@@ -16,6 +17,8 @@ export default function MaskText({ children, duration = 0.5, delay = 0, color = 
 		// marginBottom: 20
 		marginBottom: 10
 	};
+
+	/*
 	const maskStyle = {
 		width: '100%',
 		height: '100%',
@@ -24,19 +27,30 @@ export default function MaskText({ children, duration = 0.5, delay = 0, color = 
 		backgroundColor: color
 		// backgroundColor: '#555'
 	};
+	*/
 
 	//motion options
+	/*
 	const spanMotion = {
 		in: { opacity: 0 },
 		on: { opacity: 1 },
 		out: { opacity: 0, transition: { delay: 0 } },
 		time: { duration: 0.01, delay: duration / 2 + delay }
 	};
+	*/
+	const { init, active, end, time } = {
+		init: { opacity: 0 },
+		active: { opacity: 1 },
+		end: { opacity: 0, transition: { delay: 0 } },
+		time: { duration: 0.01, delay: duration / 2 + delay }
+	};
+	/*
 	const maskMotion = {
 		in: { x: '-101%' },
 		on: { x: '101%' },
 		time: { duration, delay }
 	};
+	*/
 
 	return (
 		// 텍스트를 감싸주는 Wrapper
@@ -50,7 +64,8 @@ export default function MaskText({ children, duration = 0.5, delay = 0, color = 
 				transition={{ duration: 0.01, delay: duration / 2 + delay }}>
 				{children}
 			</motion.span> */}
-			<motion.span variants={spanMotion} initial='in' animate='on' exit='out' transition={spanMotion.time}>
+			{/* <motion.span variants={spanMotion} initial='in' animate='on' exit='out' transition={spanMotion.time}> */}
+			<motion.span initial={init} animate={active} exit={end} transition={time}>
 				{children}
 			</motion.span>
 
@@ -60,12 +75,14 @@ export default function MaskText({ children, duration = 0.5, delay = 0, color = 
 				animate={{ x: '101%' }}
 				transition={{ duration, delay }}>
 			</motion.div> */}
-			<motion.div
+			{/* <motion.div
 				style={maskStyle}
 				variants={maskMotion}
 				initial='in'
 				animate='on'
-				transition={maskMotion.time}></motion.div>
+				transition={maskMotion.time}></motion.div> */}
+
+			<Mask duration={duration} delay={delay} color={color} />
 		</div>
 	);
 }
