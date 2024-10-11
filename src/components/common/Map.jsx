@@ -1,13 +1,3 @@
-/*
-			title: 'HyeHwa', //데이터 구분을 위한 타이틀
-			latlng: new kakao.maps.LatLng(37.5803593, 127.0042622), //위도,경도를 활용한 위치 인스턴스
-			markerImg: 'marker1.png', //마커이미지 경로
-			// markerSize: new kakao.maps.Size(64, 69), //마커사이즈 인스턴스
-			// markerOffet: { offset: new kakao.maps.Point(0, 0) } //마커 위치값 인스턴스
-            markerSize: new kakao.maps.Size(232, 99), //마커사이즈 인스턴스
-            arkerOffset: { offset: new kakao.maps.Point(0, 0) } //마커 위치값 인스턴스
-            */
-import { li } from 'framer-motion/client';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Map() {
@@ -76,3 +66,9 @@ export default function Map() {
 		</section>
 	);
 }
+/*
+  미션 
+  - 현재 화면에서 발생하고 있는 문제점 2개 찾기
+  - 리액트버전에서 어떻게 해결할 지 고민
+  - 점심 먹고 심심한 분들은 위의 내용 고민
+*/
