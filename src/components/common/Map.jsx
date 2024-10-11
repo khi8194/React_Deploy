@@ -74,7 +74,7 @@ export default function Map() {
 				</ul>
 
 				<ul className='btnToggleSet'>
-					<li onClick={() => setTraffic(!Traffic)}>Traffic</li>
+					<li>Traffic</li>
 					<li>RoadView</li>
 				</ul>
 			</nav>
