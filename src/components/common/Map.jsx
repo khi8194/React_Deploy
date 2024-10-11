@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 export default function Map() {
 	const { kakao } = window;
 	const ref_mapFrame = useRef(null);
-    //지점 정보를 변경하기 위한 데이터 순번을 state에 저장
-	//이후 인스턴스 호출하는 구문에 일괄적으로 Index값 연동
 	const [Index, setIndex] = useState(0);
 
+    // 각 지점 정보를 참조객체로 관리
     const ref_info = useRef([
 		{
             /*
@@ -39,6 +38,7 @@ export default function Map() {
         }
 	]);
 
+    /*
 	// const inst_marker = new kakao.maps.Marker({ position: ref_info.current[0].latlng });
     const inst_markerImg = new kakao.maps.MarkerImage(
 		// ref_info.current[0].markerImg,
@@ -48,10 +48,20 @@ export default function Map() {
 		ref_info.current[Index].markerSize,
 		ref_info.current[Index].markerOffset
 	);
+    */
+    //기존 참조객체명까지 매번 호출하기 번거로우므로 비구조화당을 통해 현재 Index순선 상태변화에 따라 활성화되고 있는 객체의 key값을 바로 추출
+    const { latlng, markerImg, markerSize, markerPos } = ref_info.current[Index];
+
 	// 마커 인스턴스 생성시 전달되는 인수의 객체에 두번째 프로퍼티로 이미지 인스턴스 연결 (이미지가 적용된 마커 생성)
 	// const inst_marker = new kakao.maps.Marker({ position: ref_info.current[0].latlng, image: inst_markerImg });
-    const inst_marker = new kakao.maps.Marker({ position: ref_info.current[Index].latlng, image: inst_markerImg });
+    // const inst_marker = new kakao.maps.Marker({ position: ref_info.current[Index].latlng, image: inst_markerImg });
+    //위의 비구조화할당으로 추출한 정보값으로 마커 인스턴스 생성
+	const inst_marker = new kakao.maps.Marker({
+		position: latlng,
+		image: new kakao.maps.MarkerImage(markerImg, markerSize, markerPos)
+	});
 
+	//컴포넌트 마운트시 한번만 지도인스턴스 생성 및 마커 인스턴스 바인딩
     /*
     //jsx반환되고 화면에 컴포넌트 마운트시 지도 인스턴스 생성
     useEffect(() => {
@@ -65,8 +75,11 @@ export default function Map() {
     */
 	useEffect(() => {
 		// const inst_map = new kakao.maps.Map(ref_mapFrame.current, { center: ref_info.current[0].latlng });
+        /*
         const inst_map = new kakao.maps.Map(ref_mapFrame.current, { center: ref_info.current[Index].latlng });
         inst_marker.setMap(inst_map);
+        */
+        const inst_map = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
 	}, []);
 
     return (
@@ -78,10 +91,3 @@ export default function Map() {
 		</section>
 	);
 }
-
-/*
-  미션 (11시 23분)
-  - 지도 출력 박스 밑에 참조객체 담겨있는 지점정보 배열을 활요하여 동적으로 지점 버튼 3개 출력
-  - 이때 title정보값으로 버튼 이름 활용
-  - 버튼 클릭시 Index 상태값을 변경해 바뀐 순번의 지점 정보로 화면이 갱신되도록 이벤트 처리
-*/
