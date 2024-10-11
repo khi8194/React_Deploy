@@ -6,7 +6,7 @@ export default function Map() {
     let ref_mapFrame = useRef(null);
 	const [Index, setIndex] = useState(0);
 
-	// 각 지점 정보를 참조객체로 관리
+	//지도 정보 배열 참조객체 등록 및 비구조화할당으로 개별 정보 추출
 	const ref_info = useRef([
 		{
             title: 'HyeHwa', 
@@ -48,7 +48,7 @@ export default function Map() {
     useEffect(() => {
         //강제로 참조된 지도영역안쪽의 html요소들을 계속 초기화처리 (지도 레이어 중첩 문제 해결)
 		ref_mapFrame.current.innerHTML = '';
-        
+
 		const inst_map = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
 		inst_marker.setMap(inst_map);
 	}, [Index]);
@@ -64,7 +64,8 @@ export default function Map() {
 					{ref_info.current.map((el, idx) => (
 						//동적으로 li생성 : 클릭한 li의 순서값 idx로 Index 상태값 변경
 						// -> 컴포넌트 재랜더링되면서 변경된 순번의 정보값으로 지도화면 갱신됨
-						<li key={idx} onClick={() => setIndex(idx)}>
+						// <li key={idx} onClick={() => setIndex(idx)}>
+                        <li key={idx} className={idx === Index ? 'on' : ''} onClick={() => setIndex(idx)}>
 							{el.title}
 						</li>
 					))}
