@@ -11,11 +11,10 @@ export default function Layout({ title, children }) {
 	return (
 		<>
 			<main className={isDetail ? 'detail' : title.toLowerCase()}>
-				<SplitText delay={0.5}>
-					{title}
-					<br />
+				<SplitText delay={0.5}>{title}</SplitText>
+				<br />
 
-					{/* <MaskText delay={1} color={'#444'} style={{ fontSize: 20, fontFamily: 'arial' }}>
+				{/* <MaskText delay={1} color={'#444'} style={{ fontSize: 20, fontFamily: 'arial' }}>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, ad?
 				</MaskText>
 				<br />
@@ -23,8 +22,7 @@ export default function Layout({ title, children }) {
 					Lorem ipsum dolor
 				</MaskText> */}
 
-					<section>{children}</section>
-				</SplitText>
+				<section>{children}</section>
 				{/* <motion.section
 					initial={{ opacity: 0, y: 200 }}
 					animate={{ opacity: 1, y: 0 }}
