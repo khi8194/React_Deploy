@@ -4,29 +4,30 @@ export default function Map() {
 	const { kakao } = window;
 	const [Index, setIndex] = useState(0);
 	const [Traffic, setTraffic] = useState(false);
-	//로드뷰 토글을 위한 state생성 초기값은 false로 로드뷰 초기 숨김처리
 	const [Roadview, setRoadview] = useState(false);
 
 	const ref_mapFrame = useRef(null);
 	const ref_viewFrame = useRef(null);
 	const ref_instMap = useRef(null);
-	//로드뷰 인스턴스가 담길 참조객체 생성
 	const ref_instView = useRef(null);
 	const ref_instClient = useRef(new kakao.maps.RoadviewClient());
+	//통일성을 주기위해 타입,줌 컨트롤 인스턴스도 참조객체에 담음
+	const ref_instType = useRef(new kakao.maps.MapTypeControl());
+	const ref_instZoom = useRef(new kakao.maps.ZoomControl());
 	const ref_info = useRef([
+		{
+			title: 'HYEWHA',
+			latlng: new kakao.maps.LatLng(37.5803593, 127.0042622),
+			markerImg: 'marker1.png',
+			markerSize: new kakao.maps.Size(232, 99),
+			markerPos: { offset: new kakao.maps.Point(116, 99) }
+		},
 		{
 			title: 'COEX',
 			latlng: new kakao.maps.LatLng(37.5094091584729, 127.0624304750884),
-			markerImg: 'marker1.png',
-			markerSize: new kakao.maps.Size(232, 99),
-			markerOffset: { offset: new kakao.maps.Point(116, 99) }
-		},
-		{
-			title: 'NEXON',
-			latlng: new kakao.maps.LatLng(37.40211707077346, 127.10344953763003),
 			markerImg: 'marker2.png',
 			markerSize: new kakao.maps.Size(232, 99),
-			markerPos: { offset: new kakao.maps.Point(116, 99) }
+			markerOffset: { offset: new kakao.maps.Point(116, 99) }
 		},
 		{
 			title: 'CITYHALL',
@@ -43,8 +44,8 @@ export default function Map() {
 		image: new kakao.maps.MarkerImage(markerImg, markerSize, markerPos)
 	});
 
-	const instType = new kakao.maps.MapTypeControl();
-	const instZoom = new kakao.maps.ZoomControl();
+	// const instType = new kakao.maps.MapTypeControl();
+	// const instZoom = new kakao.maps.ZoomControl();
 
 	const initPos = () => {
 		console.log('initPos called!!');
@@ -52,16 +53,14 @@ export default function Map() {
 	};
 
 	useEffect(() => {
-		// setTraffic(false);
-		// setRoadview(false);
-		//지점버튼 클릭해서 Index를 기반으로한 위치 인스턴스가 변경될때마다 Traffic, Roadvie상태 초기화해서 일반 지도화면 보이도록 처리
 		[setTraffic, setRoadview].forEach(func => func(false));
 		ref_mapFrame.current.innerHTML = '';
 		ref_instMap.current = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
 		inst_marker.setMap(ref_instMap.current);
-		[instType, instZoom].forEach(inst => ref_instMap.current.addControl(inst));
+		// [instType, instZoom].forEach(inst => ref_instMap.current.addControl(inst));
+		// 타입, 줌인스턴스가 담긴 참조객체를 반복돌며 addControl 메서드 호출
+		[ref_instType.current, ref_instZoom.current].forEach(inst => ref_instMap.current.addControl(inst));
 
-		//roadview 인스턴스 생성
 		ref_instView.current = new kakao.maps.Roadview(ref_viewFrame.current);
 
 		//clientInstance의 getNearestPanoId함수 호출해서 현재 위치 인스턴스값 기준으로
@@ -90,7 +89,6 @@ export default function Map() {
 			<h2>Location</h2>
 
 			<figure className='mapFrame'>
-				{/* Roadview 상태값에 따라 지도화면 로드뷰화면 보임, 암보임 처리 */}
 				<article ref={ref_mapFrame} className={`mapFrame ${!Roadview && 'on'}`}></article>
 				<article ref={ref_viewFrame} className={`viewFrame ${Roadview && 'on'}`}></article>
 			</figure>
@@ -105,13 +103,9 @@ export default function Map() {
 				</ul>
 
 				<ul className='btnToggleSet'>
-					{/* <li>Traffic</li> */}
-					{/* 버튼 클릭시 상태변경함수로 Traffic상태값 반전 및 3항 연산자로 버튼 활성/비활성화 처리 */}
 					<li onClick={() => setTraffic(!Traffic)} className={Traffic ? 'on' : ''}>
 						{`Traffic ${Traffic ? 'OFF' : 'ON'}`}
 					</li>
-					{/* <li>Roadview</li> */}
-					{/* Roadview 상태값에 따라 버튼 활성화, 비활성화 처리 */}
 					<li onClick={() => setRoadview(!Roadview)} className={Roadview ? 'on' : ''}>
 						{`Roadview ${Roadview ? 'OFF' : 'ON'}`}
 					</li>
