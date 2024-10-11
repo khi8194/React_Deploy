@@ -21,12 +21,21 @@ export default function Map() {
 			title: 'COEX', //데이터 구분을 위한 타이틀
 			latlng: new kakao.maps.LatLng(37.5803593, 127.0042622), //위도,경도를 활용한 위치 인스턴스
 			markerImg: 'marker1.png', //마커이미지 경로
-			markerSize: new kakao.maps.Size(64, 69), //마커사이즈 인스턴스
-			markerOffet: { offset: new kakao.maps.Point(0, 0) } //마커 위치값 인스턴스
+			// markerSize: new kakao.maps.Size(64, 69), //마커사이즈 인스턴스
+			// markerOffet: { offset: new kakao.maps.Point(0, 0) } //마커 위치값 인스턴스
+            markerSize: new kakao.maps.Size(232, 99), //마커사이즈 인스턴스
+            arkerOffset: { offset: new kakao.maps.Point(0, 0) } //마커 위치값 인스턴스
 		}
 	]);
-	const inst_marker = new kakao.maps.Marker({ position: ref_info.current[0].latlng });
-
+	// const inst_marker = new kakao.maps.Marker({ position: ref_info.current[0].latlng });
+    const inst_markerImg = new kakao.maps.MarkerImage(
+		ref_info.current[0].markerImg,
+		ref_info.current[0].markerSize,
+		ref_info.current[0].markerOffset
+	);
+	// 마커 인스턴스 생성시 전달되는 인수의 객체에 두번째 프로퍼티로 이미지 인스턴스 연결 (이미지가 적용된 마커 생성)
+	const inst_marker = new kakao.maps.Marker({ position: ref_info.current[0].latlng, image: inst_markerImg });
+    
     /*
     //jsx반환되고 화면에 컴포넌트 마운트시 지도 인스턴스 생성
     useEffect(() => {
