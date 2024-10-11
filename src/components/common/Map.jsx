@@ -12,7 +12,7 @@ export default function Map() {
 	//지도 정보 배열 참조객체 등록 및 비구조화할당으로 개별 정보 추출
 	const ref_info = useRef([
 		{
-            title: 'HyeHwa', 
+            title: 'HYEHWA', 
 			latlng: new kakao.maps.LatLng(37.5803593, 127.0042622), 
 			markerImg: 'marker1.png',
             markerSize: new kakao.maps.Size(232, 99),
