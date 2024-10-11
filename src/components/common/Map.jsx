@@ -9,22 +9,24 @@ export default function Map() {
 
 	const ref_mapFrame = useRef(null);
 	const ref_viewFrame = useRef(null);
-
 	const ref_instMap = useRef(null);
+	//로드뷰 인스턴스가 담길 참조객체 생성
+	const ref_instView = useRef(null);
+	const ref_instClient = useRef(new kakao.maps.RoadviewClient());
 	const ref_info = useRef([
-		{
-			title: 'HYEHWA',
-			latlng: new kakao.maps.LatLng(37.5803593, 127.0042622),
-			markerImg: 'marker1.png',
-			markerSize: new kakao.maps.Size(232, 99),
-			arkerOffset: { offset: new kakao.maps.Point(0, 0) }
-		},
 		{
 			title: 'COEX',
 			latlng: new kakao.maps.LatLng(37.5094091584729, 127.0624304750884),
 			markerImg: 'marker1.png',
 			markerSize: new kakao.maps.Size(232, 99),
 			markerOffset: { offset: new kakao.maps.Point(116, 99) }
+		},
+		{
+			title: 'NEXON',
+			latlng: new kakao.maps.LatLng(37.40211707077346, 127.10344953763003),
+			markerImg: 'marker2.png',
+			markerSize: new kakao.maps.Size(232, 99),
+			markerPos: { offset: new kakao.maps.Point(116, 99) }
 		},
 		{
 			title: 'CITYHALL',
@@ -34,7 +36,6 @@ export default function Map() {
 			markerPos: { offset: new kakao.maps.Point(116, 99) }
 		}
 	]);
-
 	const { latlng, markerImg, markerSize, markerPos } = ref_info.current[Index];
 
 	const inst_marker = new kakao.maps.Marker({
@@ -46,18 +47,33 @@ export default function Map() {
 	const instZoom = new kakao.maps.ZoomControl();
 
 	const initPos = () => {
-		console.log('initPos called!');
+		console.log('initPos called!!');
 		ref_instMap.current.setCenter(latlng);
 	};
 
 	useEffect(() => {
-		setTraffic(false);
-
+		// setTraffic(false);
+		// setRoadview(false);
+		//지점버튼 클릭해서 Index를 기반으로한 위치 인스턴스가 변경될때마다 Traffic, Roadvie상태 초기화해서 일반 지도화면 보이도록 처리
+		[setTraffic, setRoadview].forEach(func => func(false));
 		ref_mapFrame.current.innerHTML = '';
 		ref_instMap.current = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
 		inst_marker.setMap(ref_instMap.current);
-
 		[instType, instZoom].forEach(inst => ref_instMap.current.addControl(inst));
+
+		//roadview 인스턴스 생성
+		ref_instView.current = new kakao.maps.Roadview(ref_viewFrame.current);
+
+		//clientInstance의 getNearestPanoId함수 호출해서 현재 위치 인스턴스값 기준으로
+		//제일 가까운 panoId값을 찾아서 view인스턴스에 바인딩해서 로드뷰 화면에 출력
+		// RoadviewClient.getNearestPanoId(position, 50, function(panoId) {
+		// 	Roadview.setPanoId(panoId, position); //PanoId와 중심좌표를 통해 로드뷰 생성
+		// })
+		ref_instClient.current.getNearestPanoId(
+			latlng,
+			50,
+			panoId => ref_instView.current.setPanoId(panoId, latlng) /*PanoId와 중심좌표를 통해 로드뷰 생성*/
+		);
 
 		window.addEventListener('resize', initPos);
 		return () => window.removeEventListener('resize', initPos);
@@ -73,9 +89,8 @@ export default function Map() {
 		<section className='map'>
 			<h2>Location</h2>
 
-			{/* <figure ref={ref_mapFrame} className='mapFrame'></figure> */}
 			<figure className='mapFrame'>
-				{/* RoadView 상태값에 따라 지도화면 로드뷰화면 보임, 안보임 처리 */}
+				{/* Roadview 상태값에 따라 지도화면 로드뷰화면 보임, 암보임 처리 */}
 				<article ref={ref_mapFrame} className={`mapFrame ${!Roadview && 'on'}`}></article>
 				<article ref={ref_viewFrame} className={`viewFrame ${Roadview && 'on'}`}></article>
 			</figure>
@@ -96,6 +111,7 @@ export default function Map() {
 						{`Traffic ${Traffic ? 'OFF' : 'ON'}`}
 					</li>
 					{/* <li>Roadview</li> */}
+					{/* Roadview 상태값에 따라 버튼 활성화, 비활성화 처리 */}
 					<li onClick={() => setRoadview(!Roadview)} className={Roadview ? 'on' : ''}>
 						{`Roadview ${Roadview ? 'OFF' : 'ON'}`}
 					</li>
@@ -104,3 +120,8 @@ export default function Map() {
 		</section>
 	);
 }
+
+/*
+미션
+- viewFrame 안쪽에 로드뷰 인스턴스를 생성해서 로드뷰화면 출력 처리
+*/
