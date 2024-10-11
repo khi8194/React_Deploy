@@ -31,6 +31,7 @@ export default function Contact() {
 import Content from '../common/Content';
 import Layout from '../common/Layout';
 import MailForm from '../common/MailForm';
+import Map from '../common/Map';
 
 export default function Contact() {
 	return (
@@ -38,6 +39,7 @@ export default function Contact() {
 			<Content delay={1}>
 				{/* <p>Contact Page description comes here.</p> */}
 				<MailForm />
+				<Map />
 			</Content>
 		</Layout>
 	);
