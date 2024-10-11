@@ -36,8 +36,8 @@ export default function Map() {
 	]);
 
 	//기존 참조객체명까지 매번 호출하기 번거로우므로 비구조화당을 통해 현재 Index순선 상태변화에 따라 활성화되고 있는 객체의 key값을 바로 추출
-	// const { latlng, markerImg, markerSize, markerPos } = ref_info.current[Index];
-	const { latlng, markerImg, markerSize, markerPos } = ref_info[Index];
+	const { latlng, markerImg, markerSize, markerPos } = ref_info.current[Index];
+	// const { latlng, markerImg, markerSize, markerPos } = ref_info[Index];
 
 	//위의 비구조화할당으로 추출한 정보값으로 마커 인스턴스 생성
 	const inst_marker = new kakao.maps.Marker({
@@ -78,8 +78,8 @@ export default function Map() {
 
 			<nav className='btnSet'>
 				<ul className='branch'>
-					{/* {ref_info.current.map((el, idx) => ( */}
-					{ref_info.map((el, idx) => (
+					{ref_info.current.map((el, idx) => (
+						// {ref_info.map((el, idx) => (
 						//동적으로 li생성 : 클릭한 li의 순서값 idx로 Index 상태값 변경
 						// -> 컴포넌트 재랜더링되면서 변경된 순번의 정보값으로 지도화면 갱신됨
 						// <li key={idx} onClick={() => setIndex(idx)}>
