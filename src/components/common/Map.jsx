@@ -40,8 +40,8 @@ export default function Map() {
 	const ref_instMarker = useRef(null);
 	const ref_instView = useRef(null);
 
-	const initPos = () => ref_instMap.current.setCenter(latlng);
-	// const initPos = useCallback(()=>ref_instMap.current.setCenter(latlng), []);
+	// const initPos = () => ref_instMap.current.setCenter(latlng);
+	const initPos = useCallback(() => ref_instMap.current.setCenter(latlng), []);
 
 	// useEffect(() => {
 	// const createMap = () => {
