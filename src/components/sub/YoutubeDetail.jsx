@@ -12,8 +12,6 @@ export default function YoutubeDetail() {
 	const combineText = useCombineText();
 
 	useEffect(() => {
-		// console.log('detail func');
-
 		const api_key = import.meta.env.VITE_YOUTUBE_API;
 		const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
 
@@ -22,7 +20,7 @@ export default function YoutubeDetail() {
 			.then(json => {
 				setYoutubeVid(json.items[0]);
 			});
-	}, []);
+	}, [id]);
 
 	return (
 		<Layout title={YoutubeVid?.snippet.title}>
