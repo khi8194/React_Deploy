@@ -42,7 +42,9 @@ export default function Map() {
 
 	const initPos = () => ref_instMap.current.setCenter(latlng);
 
-	useEffect(() => {
+	// useEffect(() => {
+	//카카오 지도관련 인스턴스들을 생성해서 최종적으로 화면에 렌더링 해주는 함수
+	const createMap = () => {
 		ref_mapFrame.current.innerHTML = '';
 		ref_instMap.current = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
 		ref_instMarker.current = new kakao.maps.Marker({
@@ -55,6 +57,11 @@ export default function Map() {
 		[setTraffic, setRoadview].forEach(func => func(false));
 		[ref_instType.current, ref_instZoom.current].forEach(inst => ref_instMap.current.addControl(inst));
 		ref_instClient.current.getNearestPanoId(latlng, 50, panoId => ref_instView.current.setPanoId(panoId, latlng));
+	};
+
+	useEffect(() => {
+		//컴포넌트 마운트시 지도생성함수 호출
+		createMap();
 
 		window.addEventListener('resize', initPos);
 		return () => window.removeEventListener('resize', initPos);
