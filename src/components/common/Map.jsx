@@ -40,7 +40,7 @@ export default function Map() {
 	const ref_instMarker = useRef(null);
 	const ref_instView = useRef(null);
 
-	const initPos = useCallback(() => ref_instMap.current.setCenter(latlng), []);
+	const initPos = useCallback(() => ref_instMap.current.setCenter(latlng), [latlng]);
 
 	const createMap = useCallback(() => {
 		ref_mapFrame.current.innerHTML = '';
@@ -74,11 +74,13 @@ export default function Map() {
 		<section className='map'>
 			<h2>Location</h2>
 
+			{/* 맵, 로드뷰 프레임 */}
 			<figure className='mapFrame'>
 				<article ref={ref_mapFrame} className={`mapFrame ${!Roadview && 'on'}`}></article>
 				<article ref={ref_viewFrame} className={`viewFrame ${Roadview && 'on'}`}></article>
 			</figure>
 
+			{/* 컨트롤 버튼 모음 */}
 			<nav className='btnSet'>
 				<ul className='branch'>
 					{ref_info.current.map((el, idx) => (
