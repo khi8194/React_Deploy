@@ -40,7 +40,12 @@ export default function Map() {
 	const ref_instMarker = useRef(null);
 	const ref_instView = useRef(null);
 
-	const initPos = useCallback(() => ref_instMap.current.setCenter(latlng), [latlng]);
+	// const initPos = useCallback(() => ref_instMap.current.setCenter(latlng), [latlng]);
+	const initPos = useCallback(() => {
+		console.log('initPos');
+
+		ref_instMap.current.setCenter(latlng);
+	}, [latlng]);
 
 	const createMap = useCallback(() => {
 		ref_mapFrame.current.innerHTML = '';
@@ -102,3 +107,9 @@ export default function Map() {
 		</section>
 	);
 }
+
+/*
+throttle
+- 개념 : 물리적으로 일정시간동안의 함수 호출을 줄여서 성능개선
+- 사용하는 주된 경우 : 단기간에 이벤트가 많이 발생하는 resize, scroll, mousemove등에 연결되는 핸들러 함수를 throttle 처리
+*/
