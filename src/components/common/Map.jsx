@@ -40,11 +40,8 @@ export default function Map() {
 	const ref_instMarker = useRef(null);
 	const ref_instView = useRef(null);
 
-	// const initPos = () => ref_instMap.current.setCenter(latlng);
 	const initPos = useCallback(() => ref_instMap.current.setCenter(latlng), []);
 
-	// useEffect(() => {
-	// const createMap = () => {
 	const createMap = useCallback(() => {
 		ref_mapFrame.current.innerHTML = '';
 		ref_instMap.current = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
@@ -58,28 +55,7 @@ export default function Map() {
 		[setTraffic, setRoadview].forEach(func => func(false));
 		[ref_instType.current, ref_instZoom.current].forEach(inst => ref_instMap.current.addControl(inst));
 		ref_instClient.current.getNearestPanoId(latlng, 50, panoId => ref_instView.current.setPanoId(panoId, latlng));
-		// };
 	}, [kakao, latlng, markerImg, markerSize, markerPos]);
-
-	/*
-	미션
-	- 왜 의존성 배열에 initPos, createMap을 등록하라고 권고문구가 뜨는지 이유 고민
-	- 의존성 배열에 eslint가 권고하는 대로 initPos, createMap을 의존성 배열에 등록
-	- 위의 작업을 진행했을 때 새롭게 발생하는 권고문구내용 확인 후, 해당 권고내용이 발생하는 이유 고민
-	- 문제점 확인 후 메모이제이션 관련 문법으로 해셜
-
-	-------
-	
-	//initPos, createMap을 useEffect외부로 분리하면 의존성배열에 등록하라는 권고메세지 뜨는 이유
-	//이유: 해당 외부함수는 상태값을 활용해서 동작되는 함수, 해당 함수가 외부에서 변경될수도 있다고 인지하기 때문에 해당 함수도 의존성 배열에 등록 요청
-
-	//initPos, createMap을 useEffect의 의존성 배열에 등록시 다시 해당 함수자체에 useCallback처리하라는 권고문구 뜨는 이유
-	//이유: 여러 상태값이 useEffect안에 의존성배열 형태로 같이 등록되어 있기 때문에 함수자체를 메모이제이션해서 기존 함수 내용을 재사용하기 위함
-
-	//해당 함수를 useCallback으로 메모이제이션 처리하면 다시 의존성 배열에 권고사항이 뜨는 이유
-	//이유: 해당 메모이제이션 처리하긴 했는데 메모이제이션한 함수 내부에 상태값을 의존하는 구문이 포함되어 있으면 해당 상태값 변경시 함수를 재연산해야 되기 때문
-
-	*/
 
 	useEffect(() => {
 		createMap();
@@ -92,7 +68,7 @@ export default function Map() {
 		Traffic
 			? ref_instMap.current.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
 			: ref_instMap.current.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
-	}, [Traffic]);
+	}, [Traffic, kakao]);
 
 	return (
 		<section className='map'>
