@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Layout from '../common/Layout';
 import Pic from '../common/Pic';
 import useShortenText from '../../hooks/useShortenText';
@@ -11,9 +11,9 @@ export default function Youtube() {
 	const combineText = useCombineText();
 	const [Vids, setVids] = useState([]);
 
-	const fetchYoutube = () => {
+	// const fetchYoutube = () => {
+	const fetchYoutube = useCallback(() => {
 		// const api_key = 'AIzaSyCKLA8E45lLrWn_7MlJL692LpwsZ9mwa_4';
-		shortenText('David');
 		const api_key = import.meta.env.VITE_YOUTUBE_API;
 		const pid = 'PL7dKBcBdt1leSwaAYMfi9B9GkbLK_A_oh';
 		const num = 10;
@@ -25,11 +25,11 @@ export default function Youtube() {
 				console.log(json.items);
 				setVids(json.items);
 			});
-	};
+	}, []);
 
 	useEffect(() => {
 		fetchYoutube();
-	}, []);
+	}, [fetchYoutube]);
 
 	return (
 		<Layout title={'YOUTUBE'}>
