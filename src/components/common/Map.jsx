@@ -59,6 +59,14 @@ export default function Map() {
 		ref_instClient.current.getNearestPanoId(latlng, 50, panoId => ref_instView.current.setPanoId(panoId, latlng));
 	};
 
+	/*
+	미션
+	- 왜 의존성 배열에 initPos, createMap을 등록하라고 권고문구가 뜨는지 이유 고민
+	- 의존성 배열에 eslint가 권고하는 대로 initPos, createMap을 의존성 배열에 등록
+	- 위의 작업을 진행했을 때 새롭게 발생하는 권고문구내용 확인 후, 해당 권고내용이 발생하는 이유 고민
+	- 문제점 확인 후 메모이제이션 관련 문법으로 해셜
+	*/
+
 	useEffect(() => {
 		//컴포넌트 마운트시 지도생성함수 호출
 		createMap();
