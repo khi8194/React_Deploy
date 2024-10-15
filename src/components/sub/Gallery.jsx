@@ -21,8 +21,9 @@ export default function Gallery() {
 	//순서1: {type:'mine'}값으로 Type 상태값 초기화
 	const [Type, setType] = useState({ type: 'mine' });
 
-	//처음 마운트기 위쪽의 상태값으로 data fetching및 반환
+	//처음 마운트가 위쪽의 상태값으로 data fetching및 반환
 	const { data: Flickr } = useFlickrQuery(Type);
+	console.log(Flickr);
 
 	const customMotion = {
 		init: { opacity: 0, x: 200 },
@@ -56,11 +57,17 @@ export default function Gallery() {
 		setFlickr(json.photos.photo);
 	};
 	*/
+
+	/*
+	미션
+	특정 검색어에 대한 결과값이 없을 시 화면에 검색결과없음 문구 출력
+	*/
 	const handleSearch = e => {
 		e.preventDefault();
-
+		if (!e.target[0].value.trim()) return alert('Please enter your keyword.');
 		console.dir(e.target[0].value);
 		setType({ type: 'search', tag: e.target[0].value });
+		e.target[0].value = '';
 	};
 
 	useEffect(() => {
@@ -82,15 +89,15 @@ export default function Gallery() {
 				<Content delay={1.5} customMotion={customMotion}>
 					<article className='controller'>
 						<ul className='type'>
-							<li onClick={() => setType({ type: 'mine' })} className={Type.type === 'mine' && 'on'}>
+							<li onClick={() => setType({ type: 'mine' })} className={(Type.type === 'mine' && 'on') || ''}>
 								My Gallery
 							</li>
-							<li onClick={() => setType({ type: 'interest' })} className={Type.type === 'interest' && 'on'}>
+							<li onClick={() => setType({ type: 'interest' })} className={(Type.type === 'interest' && 'on') || ''}>
 								Interest Gallery
 							</li>
 						</ul>
 						<form onSubmit={handleSearch}>
-							<input type='text' placeholder='Please enter your keyword to search.' />
+							<input type='text' placeholder='Please enter your keyword.' />
 							<button>search</button>
 						</form>
 					</article>
