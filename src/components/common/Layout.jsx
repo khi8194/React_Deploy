@@ -22,7 +22,8 @@ export default function Layout({ title, children }) {
 		<>
 			{/* <main className={isDetail ? 'detail' : title.toLowerCase()}> */}
 			<main className={currentClass}>
-				<SplitText delay={0.5}>{title}</SplitText>
+				{/* <SplitText delay={0.5}>{title}</SplitText> */}
+				{pathname !== '/' && <SplitText delay={0.5}>{title}</SplitText>}
 				<section>{children}</section>
 			</main>
 
