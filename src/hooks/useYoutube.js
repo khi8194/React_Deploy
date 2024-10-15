@@ -1,10 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-//아래 커스텀훅에서 활용될 fetching 함수
 // const fetchYoutube = async () => {
 const fetchYoutube = async ({ queryKey }) => {
-	//useQuery로 전달된 opt객체는 fetching함수 안쪽의 queryKey로 전달받음
-	console.log(queryKey[1]); //{type:'A'}
+	// console.log(queryKey[1]); //{type:'A'}
 	const api_key = import.meta.env.VITE_YOUTUBE_API;
 	// const pid = 'PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu';
 	const baseURL = 'https://www.googleapis.com/youtube/v3/playlistItems';
