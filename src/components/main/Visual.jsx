@@ -3,6 +3,7 @@ import Pic from '../common/Pic';
 
 export default function Visual() {
 	const { data } = useYoutubeQuery();
+	// const { data } = useFlickrQuery();
 	return (
 		<figure className='visual'>
 			<div style={{ display: 'flex', gap: 40 }}>

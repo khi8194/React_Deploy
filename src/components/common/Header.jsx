@@ -6,14 +6,14 @@ export default function Header() {
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
 
 	const { pathname } = useLocation();
-	// console.log(pathname);
-	let currentClass = '';
-	if (pathname === '/') currentClass = 'mainHeader';
-	else currentClass = 'header';
+	// let currentClass = '';
+	// if (pathname === '/') currentClass = 'mainHeader';
+	// else currentClass = 'header';
 
 	return (
-		// <header className='header'>
-		<header className={currentClass}>
+		// <header className={currentClass}>
+		//메인전용 헤더에 변경되는 부분이 극히 적으므로 기존 header클래스를 베이스로 하고 메인페이지에서는 main클래스만 추가
+		<header className={`header ${pathname === '/' && 'main'}`}>
 			<h1>
 				<Link to={'/'}>ALPACO</Link>
 			</h1>

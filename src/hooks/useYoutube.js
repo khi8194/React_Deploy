@@ -8,8 +8,8 @@ const fetchYoutube = async ({ queryKey }) => {
 	const api_key = import.meta.env.VITE_YOUTUBE_API;
 	// const pid = 'PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu';
 	const baseURL = 'https://www.googleapis.com/youtube/v3/playlistItems';
-	const pidA = 'PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu';
-	const pidB = 'PLYOPkdUKSFgUJeKpDIbI0H1wwgQO-hCZF';
+	const pidA = 'PL7dKBcBdt1leSwaAYMfi9B9GkbLK_A_oh';
+	const pidB = 'PL7dKBcBdt1ldPfq4GcMwxx2GMqn8h6CQA';
 	const num = 10;
 	// const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}&maxResults=${num}`;
 	let url = '';

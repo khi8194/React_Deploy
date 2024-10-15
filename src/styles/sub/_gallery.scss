@@ -1,4 +1,20 @@
 .gallery {
+	.type {
+		display: flex;
+		margin: 30px 0px;
+		gap: 40px;
+
+		li {
+			padding: 10px 20px;
+			border-radius: 4px;
+			background: #444;
+			font: 400 0.7rem/1 'orbitron';
+			color: #fff;
+			letter-spacing: 1px;
+			cursor: pointer;
+		}
+	}
+
 	.galleryList {
 		width: 100%;
 		// min-height: 100vh;  //_layout.scss에 적용

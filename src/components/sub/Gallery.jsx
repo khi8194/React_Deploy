@@ -18,7 +18,9 @@ export default function Gallery() {
 	const fetchFlickr = async opt => {
 		const baseURL = 'https://www.flickr.com/services/rest/';
 		const method_mine = 'flickr.people.getPhotos';
+		//my gallery
 		const method_interest = 'flickr.interestingness.getList';
+		//interest gallery
 
 		const flickr_api = import.meta.env.VITE_FLICKR_API;
 		const myID = '201494903@N03';
@@ -36,7 +38,8 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
-		fetchFlickr({ type: 'interest' });
+		fetchFlickr({ type: 'interest' }); //interest gallery
+		// fetchFlickr({ type: 'mine' }); //my gallery
 	}, []);
 
 	useEffect(() => {
@@ -47,6 +50,10 @@ export default function Gallery() {
 		<>
 			<Layout title={'GALLERY'}>
 				<Content delay={1.5} customMotion={customMotion}>
+					<ul className='type'>
+						<li>My Gallery</li>
+						<li>Interest Gallery</li>
+					</ul>
 					<section className='galleryList'>
 						{Flickr.map((data, idx) => {
 							return (
