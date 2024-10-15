@@ -6,10 +6,14 @@ export default function Header() {
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
 
 	const { pathname } = useLocation();
-	console.log(pathname);
+	// console.log(pathname);
+	let currentClass = '';
+	if (pathname === '/') currentClass = 'mainHeader';
+	else currentClass = 'header';
 
 	return (
-		<header className='header'>
+		// <header className='header'>
+		<header className={currentClass}>
 			<h1>
 				<Link to={'/'}>ALPACO</Link>
 			</h1>

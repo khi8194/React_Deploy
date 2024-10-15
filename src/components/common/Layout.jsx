@@ -7,7 +7,7 @@ export default function Layout({ title, children }) {
 	const { pathname } = useLocation();
 	const isDetail = pathname.includes('/youtube/');
 
-	console.log(pathname);
+	// console.log(pathname);
 	let currentClass = '';
 	//path명을 통해 레이아웃에 다른 클래스명 적용
 	if (isDetail) currentClass = 'detail';
