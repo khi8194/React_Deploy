@@ -3,12 +3,27 @@ import Pic from '../common/Pic';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
+import { EffectCoverflow } from 'swiper/modules';
+
 export default function Visual() {
 	const { data } = useFlickrQuery({ type: 'mine' });
 	return (
 		<figure className='visual'>
 			{/* <Swiper> */}
-			<Swiper slidesPerView={3} spaceBetween={100} loop={true}>
+			{/* <Swiper slidesPerView={3} spaceBetween={100} loop={true}> */}
+			<Swiper
+				slidesPerView={3}
+				spaceBetween={100}
+				loop={true}
+				effect={'coverflow'}
+				coverflowEffect={{
+					rotate: 50, //패널별 회전 각도
+					stretch: 0, //패널간의 당겨짐 정도
+					depth: 100, //원근감 정도
+					modifier: 1, //위 3가지 속성의 중첩감도 비율
+					slideShadows: true //패널의 그림자
+				}}
+				modules={[EffectCoverflow]}>
 				{data?.map((pic, idx) => {
 					if (idx >= 10) return null;
 					return (
