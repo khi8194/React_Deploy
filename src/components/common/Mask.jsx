@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-// export default function Mask({ duration = 0.5, delay = 0, color = '#000' }) {
 export default function Mask({ duration = 0.5, delay = 0, color = '#000', style }) {
 	const maskStyle = {
 		width: '100%',
