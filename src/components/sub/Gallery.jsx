@@ -12,12 +12,9 @@ export default function Gallery() {
 	const customMotion = {
 		init: { opacity: 0, x: 200 },
 		active: { opacity: 1, x: 0 },
-		end: { opacity: 0, x: -200 },
-		transition: { delay: 0 }
+		end: { opacity: 0, x: -200 }
 	};
 
-	// useEffect(() => {
-	// 	const method = 'flickr.people.getPhotos';
 	const fetchFlickr = async opt => {
 		const baseURL = 'https://www.flickr.com/services/rest/';
 		const method_mine = 'flickr.people.getPhotos';
@@ -25,24 +22,19 @@ export default function Gallery() {
 
 		const flickr_api = import.meta.env.VITE_FLICKR_API;
 		const myID = '201494903@N03';
-		// const num = 10;
-		// const url = `https://www.flickr.com/services/rest/?method=${method}&api_key=${flickr_api}&user_id=${myID}&per_page=${num}&nojsoncallback=1&format=json`;
 		const num = 20;
 		let url = '';
 		const urlMine = `${baseURL}?method=${method_mine}&api_key=${flickr_api}&user_id=${myID}&per_page=${num}&nojsoncallback=1&format=json`;
 		const urlInterest = `${baseURL}?method=${method_interest}&api_key=${flickr_api}&per_page=${num}&nojsoncallback=1&format=json`;
+
 		opt.type === 'mine' && (url = urlMine);
 		opt.type === 'interest' && (url = urlInterest);
 
-		// fetch(url)
-		// 	.then(data => data.json())
-		// 	.then(json => {
-		// 		setFlickr(json.photos.photo);
-		// 	});
 		const data = await fetch(url);
 		const json = await data.json();
 		setFlickr(json.photos.photo);
 	};
+
 	useEffect(() => {
 		fetchFlickr({ type: 'interest' });
 	}, []);
