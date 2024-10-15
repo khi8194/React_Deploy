@@ -3,14 +3,18 @@ import Pic from '../common/Pic';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-// import { EffectCoverflow } from 'swiper/modules';
-
 export default function Visual() {
 	const { data } = useFlickrQuery({ type: 'mine' });
 	return (
 		<figure className='visual'>
-			{/* <Swiper> */}
-			{/* <Swiper slidesPerView={3} spaceBetween={100} loop={true}> */}
+			{/* Img titles */}
+			<div className='textBox'>
+				{data?.map((el, idx) => (
+					<h2 key={idx}>{el.title.substr(0, 30)}</h2>
+				))}
+			</div>
+
+			{/* Img Pics */}
 			<Swiper slidesPerView={3} spaceBetween={100} loop={true} centeredSlides={true}>
 				{/* <Swiper
 				slidesPerView={3}
