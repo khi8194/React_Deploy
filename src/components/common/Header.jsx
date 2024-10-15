@@ -30,11 +30,11 @@ export default function Header() {
 				</ul>
 
 				<ul className='sns'>
-					{snsArr.map((Data, idx) => {
+					{snsArr.map((Data, idx) => (
 						<li key={idx}>
 							<Data />
-						</li>;
-					})}
+						</li>
+					))}
 				</ul>
 			</nav>
 
