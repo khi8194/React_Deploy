@@ -13,7 +13,8 @@ export default function Layout({ title, children }) {
 	if (isDetail) currentClass = 'detail';
 	else if (pathname === '/') currentClass = 'main';
 	// else currentClass = title.toLowerCase();
-	else currentClass = title.toLowerCase() || '';
+	// else currentClass = title.toLowerCase() || '';
+	else currentClass = title.toLowerCase();
 
 	useEffect(() => {
 		window.scrollTo({ top: 0 });
