@@ -73,10 +73,16 @@ export default function Gallery() {
 			<Layout title={'GALLERY'}>
 				<Content delay={1.5} customMotion={customMotion}>
 					<ul className='type'>
-						{/* <li>My Gallery</li> */}
-						{/* <li>Interest Gallery</li> */}
-						<li onClick={() => setType({ type: 'mine' })}>My Gallery</li>
-						<li onClick={() => setType({ type: 'interest' })}>Interest Gallery</li>
+						{/* <li>My Gallery</li>
+						<li>Interest Gallery</li> */}
+						{/* <li onClick={() => setType({ type: 'mine' })}>My Gallery</li>
+						<li onClick={() => setType({ type: 'interest' })}>Interest Gallery</li> */}
+						<li onClick={() => setType({ type: 'mine' })} className={Type.type === 'mine' && 'on'}>
+							My Gallery
+						</li>
+						<li onClick={() => setType({ type: 'interest' })} className={Type.type === 'interest' && 'on'}>
+							Interest Gallery
+						</li>
 					</ul>
 					{/* <section className='galleryList'> */}
 					<section className='galleryList' ref={ref_gallery}>
