@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Layout from '../common/Layout';
 import Pic from '../common/Pic';
 import Modal from '../common/Modal';
 import Content from '../common/Content';
 
 export default function Gallery() {
+	const ref_gallery = useRef(null);
+
 	const [Flickr, setFlickr] = useState([]);
 	const [ModalOpen, setModalOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
@@ -45,6 +47,13 @@ export default function Gallery() {
 
 		fetchFlickr(Type);
 
+		//gallery type변경시 일단 갤러리요소에 on을 제거해서 비활성화처리
+		ref_gallery.current.classList.remove('on');
+		//비활성화 트랜지션 모션시간확보를 위해서 0.8초뒤에 다시 on을 붙여서 활성화 처리
+		setTimeout(() => {
+			ref_gallery.current.classList.add('on');
+		}, 800);
+
 		// }, []);
 	}, [Type]);
 
@@ -69,7 +78,8 @@ export default function Gallery() {
 						<li onClick={() => setType({ type: 'mine' })}>My Gallery</li>
 						<li onClick={() => setType({ type: 'interest' })}>Interest Gallery</li>
 					</ul>
-					<section className='galleryList'>
+					{/* <section className='galleryList'> */}
+					<section className='galleryList' ref={ref_gallery}>
 						{Flickr.map((data, idx) => {
 							return (
 								<article
