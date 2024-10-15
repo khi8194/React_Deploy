@@ -9,6 +9,8 @@ export default function Gallery() {
 	const [ModalOpen, setModalOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
 
+	const [Type, setType] = useState({ type: 'mine' });
+
 	const customMotion = {
 		init: { opacity: 0, x: 200 },
 		active: { opacity: 1, x: 0 },
@@ -38,9 +40,20 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
-		fetchFlickr({ type: 'interest' }); //interest gallery
+		// fetchFlickr({ type: 'interest' }); //interest gallery
 		// fetchFlickr({ type: 'mine' }); //my gallery
-	}, []);
+
+		fetchFlickr(Type);
+
+		// }, []);
+	}, [Type]);
+
+	/*
+	미션
+	갤러리 타입 버튼 클릭 시 실제 갤러리 타입에 따라 호출
+	힌트1 - fetchFlickr 호출 시 인수로 전달되는 객체가 변경되면 됨
+	힌트2 - 리액트에서 컴포넌트가 재랜더링되면 무조건 state 변경되야 함
+	*/
 
 	useEffect(() => {
 		document.body.style.overflow = ModalOpen ? 'hidden' : 'auto';
@@ -51,8 +64,10 @@ export default function Gallery() {
 			<Layout title={'GALLERY'}>
 				<Content delay={1.5} customMotion={customMotion}>
 					<ul className='type'>
-						<li>My Gallery</li>
-						<li>Interest Gallery</li>
+						{/* <li>My Gallery</li> */}
+						{/* <li>Interest Gallery</li> */}
+						<li onClick={() => setType({ type: 'mine' })}>My Gallery</li>
+						<li onClick={() => setType({ type: 'interest' })}>Interest Gallery</li>
 					</ul>
 					<section className='galleryList'>
 						{Flickr.map((data, idx) => {
