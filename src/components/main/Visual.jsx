@@ -1,3 +1,10 @@
-export default function Visual() {
-	return <figure className='visual'>Visual</figure>;
+import Layout from '../common/Layout';
+import Visual from './Visual';
+
+export default function Home() {
+	return (
+		<Layout title={'HOME'}>
+			<Visual />
+		</Layout>
+	);
 }

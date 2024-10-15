@@ -1,3 +1,4 @@
+/*
 import { useYoutubeQuery } from '../../hooks/useYoutube';
 import Layout from '../common/Layout';
 import Pic from '../common/Pic';
@@ -17,6 +18,18 @@ export default function Home() {
 					);
 				})}
 			</div>
+		</Layout>
+	);
+}
+*/
+
+import Layout from '../common/Layout';
+import Visual from './Visual';
+
+export default function Home() {
+	return (
+		<Layout title={'HOME'}>
+			<Visual />
 		</Layout>
 	);
 }
