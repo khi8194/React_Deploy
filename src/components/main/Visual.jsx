@@ -3,7 +3,7 @@ import Pic from '../common/Pic';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import { EffectCoverflow } from 'swiper/modules';
+// import { EffectCoverflow } from 'swiper/modules';
 
 export default function Visual() {
 	const { data } = useFlickrQuery({ type: 'mine' });
@@ -11,7 +11,8 @@ export default function Visual() {
 		<figure className='visual'>
 			{/* <Swiper> */}
 			{/* <Swiper slidesPerView={3} spaceBetween={100} loop={true}> */}
-			<Swiper
+			<Swiper slidesPerView={3} spaceBetween={100} loop={true} centeredSlides={true}>
+				{/* <Swiper
 				slidesPerView={3}
 				spaceBetween={100}
 				loop={true}
@@ -23,20 +24,19 @@ export default function Visual() {
 					modifier: 1, //위 3가지 속성의 중첩감도 비율
 					slideShadows: true //패널의 그림자
 				}}
-				modules={[EffectCoverflow]}>
+				modules={[EffectCoverflow]}> */}
 				{data?.map((pic, idx) => {
 					if (idx >= 10) return null;
 					return (
 						<SwiperSlide key={idx}>
-							{/* <Pic
-								src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_z.jpg`}
-								style={{ width: '100%', height: '100%' }}
-							/> */}
-							<Pic
-								src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
-								style={{ width: '100%', height: '100%' }}
-								shadow
-							/>
+							{/* swiperSlide요소에는 바로 css모션 스타일 적용 비권장 */}
+							<div className='inner'>
+								<Pic
+									src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+									style={{ width: '100%', height: '100%' }}
+									shadow
+								/>
+							</div>
 						</SwiperSlide>
 					);
 				})}
