@@ -7,13 +7,21 @@ export default function Layout({ title, children }) {
 	const { pathname } = useLocation();
 	const isDetail = pathname.includes('/youtube/');
 
+	console.log(pathname);
+	let currentClass = '';
+	//path명을 통해 레이아웃에 다른 클래스명 적용
+	if (isDetail) currentClass = 'detail';
+	else if (pathname === '/') currentClass = 'main';
+	else currentClass = title.toLowerCase();
+
 	useEffect(() => {
 		window.scrollTo({ top: 0 });
 	}, []);
 
 	return (
 		<>
-			<main className={isDetail ? 'detail' : title.toLowerCase()}>
+			{/* <main className={isDetail ? 'detail' : title.toLowerCase()}> */}
+			<main className={currentClass}>
 				<SplitText delay={0.5}>{title}</SplitText>
 				<section>{children}</section>
 			</main>
