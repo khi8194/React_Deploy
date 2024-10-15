@@ -19,11 +19,11 @@ export default function Gallery() {
 		end: { opacity: 0, x: -200 }
 	};
 
-	//순서3 - 전달된 type상태값이 opt 파라미터로 전달됨 {type:'mine'} / {type:'inertest'}
 	const fetchFlickr = async opt => {
 		const baseURL = 'https://www.flickr.com/services/rest/';
 		const method_mine = 'flickr.people.getPhotos';
 		const method_interest = 'flickr.interestingness.getList';
+		const method_search = 'flickr.photos.search';
 
 		const flickr_api = import.meta.env.VITE_FLICKR_API;
 		const myID = '201494903@N03';
@@ -31,19 +31,22 @@ export default function Gallery() {
 		let url = '';
 		const urlMine = `${baseURL}?method=${method_mine}&api_key=${flickr_api}&user_id=${myID}&per_page=${num}&nojsoncallback=1&format=json`;
 		const urlInterest = `${baseURL}?method=${method_interest}&api_key=${flickr_api}&per_page=${num}&nojsoncallback=1&format=json`;
+		const urlSearch = `${baseURL}?method=${method_search}&api_key=${flickr_api}&per_page=${num}&nojsoncallback=1&format=json&tags=${opt.tag}`;
 
-		//순서4 : 전달되는 type명에 따라서 호출 url이 변경됨
 		opt.type === 'mine' && (url = urlMine);
 		opt.type === 'interest' && (url = urlInterest);
+		opt.type === 'search' && (url = urlSearch);
 
-		//순서5 : 실제적으로 변경된 url을 통해서 서버 데이터 요청됨
 		const data = await fetch(url);
 		const json = await data.json();
 		setFlickr(json.photos.photo);
 	};
 
-	//순서2-의존성 배열에 Type상태가 등록되어 있기 때문에 순서1에 의해서 type정보가 변경되면
-	//내부에 있는 fetchFlickr에 타입상태값이 인수로 전달됨-> 데이터 호출
+	const handleSearch = e => {
+		e.preventDefault();
+		setType({ type: 'search', tag: '바다' });
+	};
+
 	useEffect(() => {
 		fetchFlickr(Type);
 
@@ -63,7 +66,6 @@ export default function Gallery() {
 				<Content delay={1.5} customMotion={customMotion}>
 					<article className='controller'>
 						<ul className='type'>
-							{/* 순서1: 각각의 버튼 클릭시 setType상태변경함수 호출해서 아래와 같이 type객체정보를 변경요청 */}
 							<li onClick={() => setType({ type: 'mine' })} className={Type.type === 'mine' && 'on'}>
 								My Gallery
 							</li>
@@ -71,9 +73,10 @@ export default function Gallery() {
 								Interest Gallery
 							</li>
 						</ul>
-						<form>
-							<input type='text' placeholder='검색어를 입력하세요.' />
-							<button>serach</button>
+						{/* <form> */}
+						<form onSubmit={handleSearch}>
+							<input type='text' placeholder='Please enter your keyword to search.' />
+							<button>search</button>
 						</form>
 					</article>
 
@@ -91,7 +94,6 @@ export default function Gallery() {
 										className='pic'
 										shadow
 									/>
-									{/* <h3>{data.title}</h3> */}
 								</article>
 							);
 						})}
