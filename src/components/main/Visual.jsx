@@ -13,7 +13,7 @@ export default function Visual() {
 			{/* <div style={{ display: 'flex', gap: 40 }}> */}
 			<Swiper>
 				{data?.map((pic, idx) => {
-					if (idx >= 3) return null;
+					if (idx >= 10) return null;
 					return (
 						// <article key={idx}>
 						// 	{/* <Pic src={vid.snippet.thumbnails.high.url} style={{ width: 400, height: 200 }} shadow /> */}
@@ -26,7 +26,7 @@ export default function Visual() {
 						<SwiperSlide key={idx}>
 							<Pic
 								src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_z.jpg`}
-								style={{ width: '100%', height: '100vh' }}
+								style={{ width: '100%', height: '100%' }}
 							/>
 						</SwiperSlide>
 					);
