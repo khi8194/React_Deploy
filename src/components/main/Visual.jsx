@@ -2,9 +2,10 @@ import { useFlickrQuery } from '../../hooks/useFlickr';
 import Pic from '../common/Pic';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 //AutoPlay 모듈 가져옴
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Virtual } from 'swiper/modules';
 import { useState } from 'react';
 import 'swiper/css';
+import 'swiper/css/virtual';
 import { FaPlay } from 'react-icons/fa';
 
 function BtnStart() {
@@ -34,7 +35,8 @@ export default function Visual() {
 
 			<Swiper
 				// modules={[Autoplay]}
-				modules={[Autoplay, Pagination]}
+				// modules={[Autoplay, Pagination]}
+				modules={[Autoplay, Pagination, Virtual]}
 				pagination={{ type: 'fraction' }}
 				// slidesPerView={3}
 				// spaceBetween={100}
@@ -60,7 +62,8 @@ export default function Visual() {
 					data.map((pic, idx) => {
 						if (idx >= 10) return null;
 						return (
-							<SwiperSlide key={idx}>
+							// <SwiperSlide key={idx}>
+							<SwiperSlide key={pic} virtualIndex={idx}>
 								<div className='inner'>
 									<Pic
 										src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
