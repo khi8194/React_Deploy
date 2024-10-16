@@ -12,6 +12,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import YoutubeDetail from './components/sub/YoutubeDetail';
 
 import { AnimatePresence } from 'framer-motion';
+import MobileMenu from './components/common/MobileMenu';
 
 export default function App() {
 	const location = useLocation();
@@ -30,7 +31,7 @@ export default function App() {
 					<Route path='/posts' element={<Posts />} />
 				</Routes>
 			</AnimatePresence>
-
+			<MobileMenu />
 			<Footer />
 		</>
 	);
