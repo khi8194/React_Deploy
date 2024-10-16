@@ -63,6 +63,13 @@ export default function Visual() {
 						return (
 							//virtualIndex 추가 지정
 							<SwiperSlide key={pic} virtualIndex={idx}>
+								{/*
+							<SwiperSlide key={pic.id} virtualIndex={idx}>
+							( key 속성의 중복 문제 발생으로 key={pic.id}로 수정했으나 확실하지 않아 주석처리 )
+							- React에서는 key 속성이 각 컴포넌트를 고유하게 식별해야 하므로, pic 객체 자체를 key로 사용하는 것은 적절하지 않습니다. 
+							- 대신, pic 객체의 고유한 값(예: pic.id)을 key로 사용하는 것이 좋습니다.
+							- pic.id를 key로 지정하면, React가 각 슬라이드를 고유하게 식별할 수 있게 되어 오류가 방지됩니다.
+							*/}
 								<div className='inner'>
 									<Pic
 										src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
