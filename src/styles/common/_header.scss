@@ -36,11 +36,11 @@
 		}
 	}
 
-	// .btnMenuToggle {
-	// 	font-size: 1.2rem;
-	// 	color: #333;
-	// 	display: none;
-	// }
+	.btnMobile {
+		cursor: pointer;
+		font-size: 1rem;
+		display: none;
+	}
 }
 
 //기존 헤더 스타일을 그대로 유지하면서 main클래스만 추가되면 메인 전용 헤더스타일 추가
@@ -48,19 +48,17 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	// z-index: 2;
 	z-index: 6;
 	border-bottom: none;
 }
 
 @media screen and (max-width: $tablet) {
 	.header {
-		// padding: 30px 10vw;
 		nav {
 			display: none;
 		}
-		// .btnMenuToggle {
-		// 	display: block;
-		// }
+		.btnMobile {
+			display: none;
+		}
 	}
 }

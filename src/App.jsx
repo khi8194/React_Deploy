@@ -13,8 +13,10 @@ import YoutubeDetail from './components/sub/YoutubeDetail';
 
 import { AnimatePresence } from 'framer-motion';
 import MobileMenu from './components/common/MobileMenu';
+import { useGlobalState } from './hooks/useGlobal';
 
 export default function App() {
+	const {MobileOpen} = useGlobalState();
 	const location = useLocation();
 	return (
 		<>
@@ -31,7 +33,8 @@ export default function App() {
 					<Route path='/posts' element={<Posts />} />
 				</Routes>
 			</AnimatePresence>
-			<MobileMenu />
+			{/* <MobileMenu /> */}
+			{MobileOpen && <MobileMenu />}
 			<Footer />
 		</>
 	);

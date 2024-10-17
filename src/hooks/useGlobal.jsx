@@ -8,7 +8,10 @@ export const GlobalContext = createContext();
 //최상위 루트 컴포넌트에 전역 상태값 전달시 필요
 export const GlobalProvider = ({ children }) => {
 	const [ModalOpen, setModalOpen] = useState(false);
-	return <GlobalContext.Provider value={{ ModalOpen, setModalOpen }}>{children}</GlobalContext.Provider>;
+  const [MobileOpen, setMobileOpen] = useState(false);
+  // return <GlobalContext.Provider value={{ ModalOpen, setModalOpen }}>{children}</GlobalContext.Provider>;
+  return <GlobalContext.Provider value={{ ModalOpen, setModalOpen, MobileOpen, setMobileOpen }}>{children}</GlobalContext.Provider>;
+  
 };
 
 //내부적으로 GlobalContext를 접근하게 해주는 useContext를 자동 호출해주는 useGlobalState커스텀 훅 생성

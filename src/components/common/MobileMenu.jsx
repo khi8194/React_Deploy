@@ -1,30 +1,22 @@
-// import { motion } from 'framer-motion';
-
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+// import { AnimatePresence, motion } from 'framer-motion';
+// import { useEffect, useState } from 'react';
+// import { FaBars } from 'react-icons/fa';
 
 export default function MobileMenu() {
+	/*
 	const [MobileOpen, setMobileOpen] = useState(false);
 
-	// return <aside className='mobile.Menu'>MobileMenu</aside>;
 	const { initial, animate, exit, transition } = {
 		initial: { x: -300, opacity: 0 },
 		animate: { x: 0, opacity: 1 },
-		// exit: { x: -300, opacity: 0, transition: { duration: 0.5 } },
 		exit: { x: -300, opacity: 0 },
 		transition: { duration: 0.5 }
 	};
-	// const [MobileOpen, setMobileOpen] = useState(false);
+	
 	const closePanel = () => {
 		console.log('closePanel');
 		window.innerWidth >= 1000 && setMobileOpen(false);
 	};
-
-	// useEffect(() => {
-	// 	window.addEventListener('resize', closePanel);
-	// 	return () => window.removeEventListener('resize', closePanel);
-	// }, []);
 
 	return (
 		<>
@@ -40,4 +32,7 @@ export default function MobileMenu() {
 			</AnimatePresence>
 		</>
 	);
+	*/
+
+	return <aside className='mobileMenu'>MobileMenu</aside>;
 }
