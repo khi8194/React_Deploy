@@ -7,7 +7,7 @@ import { useFlickrQuery } from '../../hooks/useFlickr';
 import { useGlobalState } from '../../hooks/useGlobal';
 
 export default function Gallery() {
-	console.log('gallery');
+	// console.log('gallery');
 	const { store, dispatch } = useGlobalState();
 	//순서1 - 커스텀훅을 통해 전역관리되는 상태값인 ModalOpen, setModlOpen 가져옴
 	// const { ModalOpen, setModalOpen } = useGlobalState();

@@ -2,7 +2,10 @@
 // import { useEffect, useState } from 'react';
 // import { FaBars } from 'react-icons/fa';
 
+import { useEffect } from 'react';
 import { useGlobalState } from '../../hooks/useGlobal';
+import { motion } from 'framer-motion';
+import useThrottle from '../../hooks/useThrottle';
 
 export default function MobileMenu() {
 	/*
@@ -39,10 +42,23 @@ export default function MobileMenu() {
 	// return <aside className='mobileMenu'>MobileMenu</aside>;
 	// const { menuDispatch } = useGlobalState();
 	const { dispatch } = useGlobalState();
+	const closeMenu = () => {
+		console.log('closeMenu');
+		if (window.innerWidth >= 1000) dispatch({ type: 'CLOSE' });
+	};
+	const throttleCloseMenu = useThrottle(closeMenu);
+
+	useEffect(() => {
+		window.addEventListener('resize', throttleCloseMenu);
+		return () => window.removeEventListener('resize', throttleCloseMenu);
+	}, [throttleCloseMenu]);
+
 	return (
 		// <aside className='mobileMenu' onClick={() => menuDispatch({ type: 'CLOSE' })}>
-		<aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
+		// <aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
+		<motion.aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
 			MobileMenu
-		</aside>
+			{/* </aside> */}
+		</motion.aside>
 	);
 }

@@ -26,6 +26,7 @@ export default function Members() {
 	*/
 
 	// const { menuDispatch } = useGlobalState();
+	console.log('Members');
 
 	return (
 		<Layout title={'MEMBERS'}>
