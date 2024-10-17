@@ -7,7 +7,8 @@ import { createContext, useContext, useReducer } from 'react';
 */
 //각 리듀서함수에서 괄리할 초기 state값 생성
 // const initModalState = { isOpen: false };
-const initMenuState = { isMenu: false };
+// const initMenuState = { isMenu: false };
+const initState = { isMenu: false };
 
 //위의 초기상태값, 액션타입을 활용해서 전역상태값을 변경해주는 변형자 함수 (리듀서)
 /*
@@ -17,11 +18,16 @@ const modalReducer = (state, action) => {
 	else if (action.type === 'TOGGLE') return { ...state, isOpen: !state.isOpen };
 	else return state;
 };*/
+/*
 const menuReducer = (state, action) => {
 	if (action.type === 'OPEN') return { ...state, isMenu: true };
 	else if (action.type === 'CLOSE') return { ...state, isMenu: false };
 	else if (action.type === 'TOGGLE') return { ...state, isMenu: !state.isMenu };
 	else return state;
+}; */
+const reducer = (state, action) => {
+	if (action.type === 'TOGGLE') return { ...state, isMenu: !state.isMenu };
+	if (action.type === 'CLOSE') return { ...state, isMenu: false };
 };
 
 //createContext로 전역 컨텍스트 생성
@@ -36,13 +42,15 @@ export const GlobalProvider = ({ children }) => {
 	// const [ModalOpen, setModalOpen] = useState(false);
 	// const [MobileOpen, setMobileOpen] = useState(false);
 	// const [state, dispatch] = useReducer(modalReducer, initModalState);
-	const [MenuState, menuDispatch] = useReducer(menuReducer, initMenuState);
+	// const [MenuState, menuDispatch] = useReducer(menuReducer, initMenuState);
+	const [store, dispatch] = useReducer(reducer, initState);
 
 	// return <GlobalContext.Provider value={{ ModalOpen, setModalOpen }}>{children}</GlobalContext.Provider>;
 	return (
 		// <GlobalContext.Provider value={{ ModalOpen, setModalOpen, MobileOpen, setMobileOpen }}>
 		// <GlobalContext.Provider value={{ state, dispatch }}>{children}</GlobalContext.Provider>
-		<GlobalContext.Provider value={{ MenuState, menuDispatch }}>{children}</GlobalContext.Provider>
+		// <GlobalContext.Provider value={{ MenuState, menuDispatch }}>{children}</GlobalContext.Provider>
+		<GlobalContext.Provider value={{ store, dispatch }}>{children}</GlobalContext.Provider>
 	);
 };
 

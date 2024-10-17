@@ -37,9 +37,11 @@ export default function MobileMenu() {
 	*/
 
 	// return <aside className='mobileMenu'>MobileMenu</aside>;
-	const { menuDispatch } = useGlobalState();
+	// const { menuDispatch } = useGlobalState();
+	const { dispatch } = useGlobalState();
 	return (
-		<aside className='mobileMenu' onClick={() => menuDispatch({ type: 'CLOSE' })}>
+		// <aside className='mobileMenu' onClick={() => menuDispatch({ type: 'CLOSE' })}>
+		<aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
 			MobileMenu
 		</aside>
 	);
