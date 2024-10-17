@@ -4,14 +4,12 @@ import Pic from '../common/Pic';
 import Modal from '../common/Modal';
 import Content from '../common/Content';
 import { useFlickrQuery } from '../../hooks/useFlickr';
+import { useGlobalData } from '../../hooks/useGlobalContext';
 
 export default function Gallery() {
-	/*
-	// useFlickrQuery({ type: 'mine' });
-	//순서1- 갤러리 컴포넌트에 커스텀훅 호출시 전달해야되는 옵션 객체를 인수로 전달
-	const { data } = useFlickrQuery({ type: 'mine' });
-	console.log(data); //리액트쿼리훅이 데이터를 잘 반환하는지 확인
-	*/
+	const globalState = useGlobalData();
+	console.log(globalState);
+
 	const ref_gallery = useRef(null);
 
 	// const [Flickr, setFlickr] = useState([]);
@@ -31,37 +29,6 @@ export default function Gallery() {
 		end: { opacity: 0, x: -200 }
 	};
 
-	/*
-	const fetchFlickr = async opt => {
-		const baseURL = 'https://www.flickr.com/services/rest/';
-		const method_mine = 'flickr.people.getPhotos';
-		const method_interest = 'flickr.interestingness.getList';
-		const method_search = 'flickr.photos.search';
-
-		const flickr_api = import.meta.env.VITE_FLICKR_API;
-		const myID = '201494903@N03';
-		const num = 20;
-		let url = '';
-
-		const urlMine = `${baseURL}?method=${method_mine}&api_key=${flickr_api}&user_id=${myID}&per_page=${num}&nojsoncallback=1&format=json`;
-		const urlInterest = `${baseURL}?method=${method_interest}&api_key=${flickr_api}&per_page=${num}&nojsoncallback=1&format=json`;
-
-		const urlSearch = `${baseURL}?method=${method_search}&api_key=${flickr_api}&per_page=${num}&nojsoncallback=1&format=json&tags=${opt.tag}`;
-
-		opt.type === 'mine' && (url = urlMine);
-		opt.type === 'interest' && (url = urlInterest);
-		opt.type === 'search' && (url = urlSearch);
-
-		const data = await fetch(url);
-		const json = await data.json();
-		setFlickr(json.photos.photo);
-	};
-	*/
-
-	/*
-	미션
-	특정 검색어에 대한 결과값이 없을 시 화면에 검색결과없음 문구 출력
-	*/
 	const handleSearch = e => {
 		e.preventDefault();
 		if (!e.target[0].value.trim()) return alert('Please re-enter your keyword.');
@@ -71,8 +38,6 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
-		// fetchFlickr(Type);
-
 		ref_gallery.current.classList.remove('on');
 		setTimeout(() => {
 			ref_gallery.current.classList.add('on');
@@ -119,6 +84,7 @@ export default function Gallery() {
 										className='pic'
 										shadow
 									/>
+									{/* <h3>{data.title}</h3> */}
 								</article>
 							);
 						})}
