@@ -8,7 +8,8 @@ import { createContext, useContext, useReducer } from 'react';
 //각 리듀서함수에서 괄리할 초기 state값 생성
 // const initModalState = { isOpen: false };
 // const initMenuState = { isMenu: false };
-const initState = { isMenu: false };
+// const initState = { isMenu: false };
+const initState = { isMenu: false, isModal: false };
 
 //위의 초기상태값, 액션타입을 활용해서 전역상태값을 변경해주는 변형자 함수 (리듀서)
 /*
@@ -28,6 +29,9 @@ const menuReducer = (state, action) => {
 const reducer = (state, action) => {
 	if (action.type === 'TOGGLE') return { ...state, isMenu: !state.isMenu };
 	if (action.type === 'CLOSE') return { ...state, isMenu: false };
+	if (action.type === 'OPEN_MODAL') return { ...state, isModal: true };
+	if (action.type === 'CLOSE_MODAL') return { ...state, isModal: false };
+	else return state;
 };
 
 //createContext로 전역 컨텍스트 생성
