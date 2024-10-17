@@ -4,27 +4,21 @@ import Pic from '../common/Pic';
 import Modal from '../common/Modal';
 import Content from '../common/Content';
 import { useFlickrQuery } from '../../hooks/useFlickr';
-// import { useGlobalData } from '../../hooks/useGlobalContext';
 import { useGlobalState } from '../../hooks/useGlobal';
 
 export default function Gallery() {
-	// const globalState = useGlobalData();
-	// console.log(globalState);
-	const abc = useGlobalState();
-	console.log(abc);
-
+	// const abc = useGlobalState();
+	// console.log(abc);
+	const { ModalOpen, setModalOpen } = useGlobalState();
 	const ref_gallery = useRef(null);
 
-	// const [Flickr, setFlickr] = useState([]);
-	const [ModalOpen, setModalOpen] = useState(false);
+	// const [ModalOpen, setModalOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
 
-	//순서1: {type:'mine'}값으로 Type 상태값 초기화
 	const [Type, setType] = useState({ type: 'mine' });
 
-	//처음 마운트가 위쪽의 상태값으로 data fetching및 반환
 	const { data: Flickr } = useFlickrQuery(Type);
-	console.log(Flickr);
+	// console.log(Flickr);
 
 	const customMotion = {
 		init: { opacity: 0, x: 200 },
@@ -96,7 +90,8 @@ export default function Gallery() {
 			</Layout>
 
 			{ModalOpen && (
-				<Modal setModalOpen={setModalOpen}>
+				// <Modal setModalOpen={setModalOpen}>
+				<Modal>
 					<Pic
 						src={`https://live.staticflickr.com/${Flickr[Index].server}/${Flickr[Index].id}_${Flickr[Index].secret}_b.jpg`}
 						shadow
