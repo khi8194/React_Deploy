@@ -21,10 +21,10 @@ export default function MobileMenu() {
 		window.innerWidth >= 1000 && setMobileOpen(false);
 	};
 
-	useEffect(() => {
-		window.addEventListener('resize', closePanel);
-		return () => window.removeEventListener('resize', closePanel);
-	}, []);
+	// useEffect(() => {
+	// 	window.addEventListener('resize', closePanel);
+	// 	return () => window.removeEventListener('resize', closePanel);
+	// }, []);
 
 	return (
 		<>
