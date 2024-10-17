@@ -2,6 +2,8 @@
 // import { useEffect, useState } from 'react';
 // import { FaBars } from 'react-icons/fa';
 
+import { useGlobalState } from '../../hooks/useGlobal';
+
 export default function MobileMenu() {
 	/*
 	const [MobileOpen, setMobileOpen] = useState(false);
@@ -34,5 +36,11 @@ export default function MobileMenu() {
 	);
 	*/
 
-	return <aside className='mobileMenu'>MobileMenu</aside>;
+	// return <aside className='mobileMenu'>MobileMenu</aside>;
+	const { menuDispatch } = useGlobalState();
+	return (
+		<aside className='mobileMenu' onClick={() => menuDispatch({ type: 'CLOSE' })}>
+			MobileMenu
+		</aside>
+	);
 }
