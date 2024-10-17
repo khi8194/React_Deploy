@@ -1,4 +1,20 @@
-import { createContext, useContext, useState } from 'react';
+// import { createContext, useContext, useReducer, useState } from 'react';
+import { createContext, useContext, useReducer } from 'react';
+
+/*
+	컴포넌트로 부터 리듀서가 전달받을 action객체 구조
+	{type:'요청타입', 변경할객체정보값 }
+*/
+//각 리듀서함수에서 괄리할 초기 state값 생성
+const initModalState = { isOpen: false };
+
+//위의 초기상태값, 액션타입을 활용해서 전역상태값을 변경해주는 변형자 함수 (리듀서)
+const modalReducer = (state, action) => {
+	if (action.type === 'OPEN') return { ...state, isOpen: true };
+	else if (action.type === 'CLOSE') return { ...state, isOpen: false };
+	else if (action.type === 'TOGGLE') return { ...state, isOpen: !state.isOpen };
+	else return state;
+};
 
 //createContext로 전역 컨텍스트 생성
 export const GlobalContext = createContext();
@@ -7,13 +23,16 @@ export const GlobalContext = createContext();
 //이때 전역에서 관리하고자 하는 state값을 생성해서 value로 지정하면 {children}(App) 하위 컴포넌트 어디에서든 해당 값을 접근 가능
 //최상위 루트 컴포넌트에 전역 상태값 전달시 필요
 export const GlobalProvider = ({ children }) => {
-	const [ModalOpen, setModalOpen] = useState(false);
-	const [MobileOpen, setMobileOpen] = useState(false);
+	//useReducer를 이용해서 첫번째 인수에는 리듀서함수, 두번째 인수에는 초기 상태값을
+	//변형된 상태값과 해당 상태를 변경할수 있는 action객체를 전달해주는 dispatch함수를 반환 받음
+	// const [ModalOpen, setModalOpen] = useState(false);
+	// const [MobileOpen, setMobileOpen] = useState(false);
+	const [state, dispatch] = useReducer(modalReducer, initModalState);
+
 	// return <GlobalContext.Provider value={{ ModalOpen, setModalOpen }}>{children}</GlobalContext.Provider>;
 	return (
-		<GlobalContext.Provider value={{ ModalOpen, setModalOpen, MobileOpen, setMobileOpen }}>
-			{children}
-		</GlobalContext.Provider>
+		// <GlobalContext.Provider value={{ ModalOpen, setModalOpen, MobileOpen, setMobileOpen }}>
+		<GlobalContext.Provider value={{ state, dispatch }}>{children}</GlobalContext.Provider>
 	);
 };
 
