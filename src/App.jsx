@@ -13,13 +13,14 @@ import YoutubeDetail from './components/sub/YoutubeDetail';
 
 import { AnimatePresence } from 'framer-motion';
 import MobileMenu from './components/common/MobileMenu';
-import { useGlobalState } from './hooks/useGlobal';
+// import { useGlobalState } from './hooks/useGlobal';
+import { useZustandStore } from './hooks/useZustand';
 
 export default function App() {
-	// const {MobileOpen} = useGlobalState();
-	// const { MenuState } = useGlobalState();
-	const { store } = useGlobalState();
+	// const { store } = useGlobalState();
 	const location = useLocation();
+	const { IsMenu } = useZustandStore();
+
 	return (
 		<>
 			<Header />
@@ -38,7 +39,8 @@ export default function App() {
 			{/* <MobileMenu /> */}
 			{/* {MobileOpen && <MobileMenu />} */}
 			{/* {MenuState.isMenu && <MobileMenu />} */}
-			{store.isMenu && <MobileMenu />}
+			{/* <AnimatePresence>{store.isMenu && <MobileMenu />}</AnimatePresence> */}
+			<AnimatePresence>{IsMenu && <MobileMenu />}</AnimatePresence>
 			<Footer />
 		</>
 	);
