@@ -39,7 +39,6 @@
 			height: 100%;
 			padding: 20vh 0px;
 			box-sizing: border-box;
-			// transform: translateX('150%');
 
 			.swiper-slide {
 				width: 100%;
@@ -79,11 +78,11 @@
 			}
 		}
 	}
+
 	.btnStart {
 		position: absolute;
 		bottom: 5vh;
-		left: 30vw;
-		// z-index: 3;
+		right: 30vw;
 		z-index: 11;
 		border: none;
 		background: transparent;
@@ -91,6 +90,7 @@
 		color: #444;
 		cursor: pointer;
 	}
+
 	.swiper-pagination {
 		position: absolute;
 		top: 15vh;
@@ -115,6 +115,7 @@
 			bottom: 20vh;
 			z-index: 4;
 		}
+
 		.swiper {
 			left: 0%;
 			padding: 10vh 10vw;
