@@ -42,6 +42,7 @@ export default function MobileMenu() {
 
 	// return <aside className='mobileMenu'>MobileMenu</aside>;
 	// const { menuDispatch } = useGlobalState();
+<<<<<<< HEAD
 	// const { dispatch } = useGlobalState();
 	console.log('mobileMenu');
 	const { dispatch } = useGlobalDispatch();
@@ -53,13 +54,15 @@ export default function MobileMenu() {
 		transition: { duration: 0.5 }
 	};
 
+=======
+	const { dispatch } = useGlobalState();
+>>>>>>> parent of 8534cee (모바일 패널 모션 사라지는 효과 유지 및 안쪽 윈도우 이벤트 핸들러 해제 문제 해결)
 	const closeMenu = () => {
 		console.log('closeMenu');
 		if (window.innerWidth >= 1000) dispatch({ type: 'CLOSE' });
 	};
 	const throttleCloseMenu = useThrottle(closeMenu);
 
-	//해당 컴포넌트를 호출하는 부모컴포넌트인 App에서 마운트, 언마운트 처리하고 있으므로 제대로 throttledCloseMenu 이벤트 핸들러 제거 가능
 	useEffect(() => {
 		window.addEventListener('resize', throttleCloseMenu);
 		return () => window.removeEventListener('resize', throttleCloseMenu);
@@ -68,6 +71,7 @@ export default function MobileMenu() {
 	return (
 		// <aside className='mobileMenu' onClick={() => menuDispatch({ type: 'CLOSE' })}>
 		// <aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
+<<<<<<< HEAD
 		// <motion.aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
 		// <motion.aside
 		// 	className='mobileMenu'
@@ -83,6 +87,9 @@ export default function MobileMenu() {
 			animate={animate}
 			exit={exit}
 			transition={transition}>
+=======
+		<motion.aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
+>>>>>>> parent of 8534cee (모바일 패널 모션 사라지는 효과 유지 및 안쪽 윈도우 이벤트 핸들러 해제 문제 해결)
 			MobileMenu
 			{/* </aside> */}
 		</motion.aside>

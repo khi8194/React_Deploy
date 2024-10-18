@@ -18,10 +18,8 @@ import { useGlobalState } from './hooks/useGlobal';
 export default function App() {
 	// const {MobileOpen} = useGlobalState();
 	// const { MenuState } = useGlobalState();
-
-	const location = useLocation();
 	const { store } = useGlobalState();
-
+	const location = useLocation();
 	return (
 		<>
 			<Header />
@@ -40,10 +38,7 @@ export default function App() {
 			{/* <MobileMenu /> */}
 			{/* {MobileOpen && <MobileMenu />} */}
 			{/* {MenuState.isMenu && <MobileMenu />} */}
-			{/* {store.isMenu && <MobileMenu />} */}
-
-			{/* MobileMenu 컴포넌트 언마운트시 사라지는 모션이 끝날때까지 대기시키기 위해 AnimatePresence로 감싸줌 */}
-			<AnimatePresence>{store.isMenu && <MobileMenu />}</AnimatePresence>
+			{store.isMenu && <MobileMenu />}
 			<Footer />
 		</>
 	);
