@@ -1,12 +1,12 @@
 import { FaBars, FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-// import { useGlobalDispatch, ACTIONS } from '../../hooks/useGlobal';
 import { useZustandStore } from '../../hooks/useZustand';
 
 export default function Header() {
-	// const { dispatch } = useGlobalState();
 	console.log('header');
-	const { setMenuToggle } = useZustandStore();
+	// const { setMenuToggle } = useZustandStore();
+	//해당 컴포넌트는 setMemuToggle이라는 전역상태변경함수가 호출시에만 리랜더링 되도록 선택적 상태구독 처리
+	const setMenuToggle = useZustandStore(state => state.setMenuToggle);
 
 	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];

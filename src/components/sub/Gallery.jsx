@@ -4,7 +4,6 @@ import Pic from '../common/Pic';
 import Modal from '../common/Modal';
 import Content from '../common/Content';
 import { useFlickrQuery } from '../../hooks/useFlickr';
-// import { useGlobalDispatch, useGlobalState, ACTIONS } from '../../hooks/useGlobal';
 import { AnimatePresence } from 'framer-motion';
 import { useZustandStore } from '../../hooks/useZustand';
 
@@ -18,7 +17,7 @@ export default function Gallery() {
 
 	// const { IsModal, setModalOpen } = useZustandStore();
 	//커스텀훅에 콜백함수를 인수로 넣어서 자동전달되는 전역 state에서 직접 IsModal상태값을 추출해서 변수에 담아줌
-	//위와 같은 로직을 통해서 해당 갤러리 컴포넌트 IsModal값을 제외한 나머지 전역 상태값 변경에는 반응하지 않는 선택적 상태구독 처리
+	//해당 갤러리 컴포넌트는 IsModal값을 제외한 나머지 전역 상태값 변경에는 반응하지 않는 선택적 상태구독 처리
 	//이슈사항: 아래와 같이 선택적 상태구독을 했음에도 불구하고 Gallery컴포넌트는 다른 전역 상태값 변경 시 계속 재랜더링 됨
 	//이유: 해당 컴포넌트 자체적으로 선택적 상태구독을 했다고 하더라도 gallery를 감싸는 부모 컴포넌트가 재랜더링시 자식 컴포넌트 같이 재랜더링됨
 	const IsModal = useZustandStore(state => state.IsModal);
@@ -105,15 +104,6 @@ export default function Gallery() {
 				</Content>
 			</Layout>
 			{/* 순서3- 상태변경함수를 통해서 ModalOpen 전역상태값 변경시 Modal 컴포넌트 마운트 */}
-			{/* {ModalOpen && ( */}
-			{/* {store.isModal && (
-				<Modal>
-					<Pic
-						src={`https://live.staticflickr.com/${Flickr[Index].server}/${Flickr[Index].id}_${Flickr[Index].secret}_b.jpg`}
-						shadow
-					/>
-				</Modal>
-			)} */}
 			<AnimatePresence>
 				{/* {store.isModal && ( */}
 				{IsModal && (
