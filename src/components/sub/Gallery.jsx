@@ -4,17 +4,17 @@ import Pic from '../common/Pic';
 import Modal from '../common/Modal';
 import Content from '../common/Content';
 import { useFlickrQuery } from '../../hooks/useFlickr';
-// import { useGlobalState } from '../../hooks/useGlobal';
-import { useGlobalDispatch, useGlobalState, ACTIONS } from '../../hooks/useGlobal';
+// import { useGlobalDispatch, useGlobalState, ACTIONS } from '../../hooks/useGlobal';
 import { AnimatePresence } from 'framer-motion';
+import { useZustandStore } from '../../hooks/useZustand';
 
 export default function Gallery() {
 	console.log('gallery');
-	// const { store, dispatch } = useGlobalState();
-	const { store } = useGlobalState();
-	const { dispatch } = useGlobalDispatch();
+	// const { store } = useGlobalState();
+	// const { dispatch } = useGlobalDispatch();
+	const { IsModal, setModalOpen } = useZustandStore();
+
 	//순서1 - 커스텀훅을 통해 전역관리되는 상태값인 ModalOpen, setModlOpen 가져옴
-	// const { ModalOpen, setModalOpen } = useGlobalState();
 	const ref_gallery = useRef(null);
 	const [Index, setIndex] = useState(0);
 	const [Type, setType] = useState({ type: 'mine' });
@@ -43,10 +43,10 @@ export default function Gallery() {
 	}, [Type]);
 
 	useEffect(() => {
-		// document.body.style.overflow = ModalOpen ? 'hidden' : 'auto';
-		// }, [ModalOpen]);
-		document.body.style.overflow = store.isModal ? 'hidden' : 'auto';
-	}, [store.isModal]);
+		// 	document.body.style.overflow = store.isModal ? 'hidden' : 'auto';
+		// }, [store.isModal]);
+		document.body.style.overflow = IsModal ? 'hidden' : 'auto';
+	}, [IsModal]);
 
 	return (
 		<>
@@ -78,7 +78,8 @@ export default function Gallery() {
 									onClick={() => {
 										// setModalOpen(true);
 										// dispatch({ type: 'OPEN_MODAL' });
-										dispatch({ type: ACTIONS.SET_MODAL_OPEN });
+										// dispatch({ type: ACTIONS.SET_MODAL_OPEN });
+										setModalOpen();
 										setIndex(idx);
 									}}>
 									<Pic
@@ -104,7 +105,8 @@ export default function Gallery() {
 				</Modal>
 			)} */}
 			<AnimatePresence>
-				{store.isModal && (
+				{/* {store.isModal && ( */}
+				{IsModal && (
 					<Modal>
 						<Pic
 							src={`https://live.staticflickr.com/${Flickr[Index].server}/${Flickr[Index].id}_${Flickr[Index].secret}_b.jpg`}

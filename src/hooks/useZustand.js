@@ -10,6 +10,11 @@ export const useZustandStore = create(set => ({
 }));
 
 /*
+미션
+기존과 같은 로직으로 갤러리 컴포넌트와 모달 컴포넌트를 위의 useZustandStore 훅을 통해 전역상태 관리처리
+*/
+
+/*
 client side data를 zustand로 전역상태 관리하면 좋은점
 - 코드의 간결성 (기존 constext API 기반의 전역컨텍스트 생성, 리듀서함수 생성, action 객체 관리등의 번잡스러운 작업 불필요)
 - Provider 컴포넌트를 따로 생성해서 전역 컴포넌트를 wrapping처리할 필요 없음
