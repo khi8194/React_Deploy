@@ -6,7 +6,9 @@ import { motion } from 'framer-motion';
 export default function Modal({ children }) {
 	// const { dispatch } = useGlobalState();
 	// const { dispatch } = useGlobalDispatch;
+	console.log('modal');
 	const { dispatch } = useGlobalDispatch();
+
 	return (
 		// <aside className='modal'>
 		<motion.aside className='modal'>
