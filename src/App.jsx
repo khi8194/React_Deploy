@@ -15,6 +15,7 @@ import { AnimatePresence } from 'framer-motion';
 import MobileMenu from './components/common/MobileMenu';
 // import { useGlobalState } from './hooks/useGlobal';
 import { useZustandStore } from './hooks/useZustand';
+import ColorSelector from './components/common/ColorSelector';
 
 export default function App() {
 	console.log('app');
@@ -38,6 +39,9 @@ export default function App() {
 					<Route path='/posts' element={<Posts />} />
 				</Routes>
 			</AnimatePresence>
+
+			<ColorSelector />
+
 			{/* <MobileMenu /> */}
 			{/* {MobileOpen && <MobileMenu />} */}
 			{/* {MenuState.isMenu && <MobileMenu />} */}
