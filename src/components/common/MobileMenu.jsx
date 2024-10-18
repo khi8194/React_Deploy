@@ -19,11 +19,11 @@ export default function MobileMenu() {
 		console.log('closeMenu');
 		if (window.innerWidth >= 1000) setMenuClose();
 	};
+
 	const throttledCloseMenu = useThrottle(closeMenu);
 
 	useEffect(() => {
 		window.addEventListener('resize', throttledCloseMenu);
-
 		return () => window.removeEventListener('resize', throttledCloseMenu);
 	}, [throttledCloseMenu]);
 

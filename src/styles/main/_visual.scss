@@ -87,7 +87,8 @@
 		border: none;
 		background: transparent;
 		font-size: 1.4rem;
-		color: #444;
+		// color: #444;
+		color: rgba(var(--keyRGB), 0.7);
 		cursor: pointer;
 	}
 
@@ -101,7 +102,8 @@
 
 		.swiper-pagination-current {
 			font-size: 5rem;
-			color: #111;
+			// color: #111;
+			color: rgba(var(--keyRGB), 0.8);
 		}
 	}
 }

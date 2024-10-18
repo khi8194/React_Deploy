@@ -4,7 +4,26 @@ $tablet: 999px;
 $mobile: 599px;
 
 :root {
-	--keyColor: hotpink;
+	// --keyColor: royalblue;
+	--keyRGB: 3, 58, 23;
+}
+//rgba(var(--keyRGB),0.5);
+//rgba(var(40,40,40,0.5);
+
+//black: 40,40,40;
+//hotpink: 184, 0, 190;
+//blue: 0, 120, 150;
+//green: 3, 58, 23;
+
+//scss파일 없이 동적으로 제어되는 스타일을 css변수로 제어가 필요할 때 클래스명 부여후 !important로 우선순위 높여줌
+.mask {
+	background-color: rgba(var(--keyRGB), 1) !important;
+}
+.maskText {
+	color: rgba(var(--keyRGB), 0.8) !important;
+}
+.test {
+	background: rgb(3, 58, 23);
 }
 
 //common
@@ -15,6 +34,7 @@ $mobile: 599px;
 @import './common/modal';
 @import './common/mailForm';
 @import './common/map';
+@import './common/mobileMenu';
 
 //main
 @import './main/home';

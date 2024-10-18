@@ -10,7 +10,8 @@
 	h1 {
 		font: 700 1.2rem/1 'orbitron';
 		// color: #333;
-		color: var(--keyColor);
+		// color: var(--keyColor);
+		color: rgba(var(--keyRGB), 1);
 		letter-spacing: 1px;
 	}
 
@@ -27,7 +28,8 @@
 
 			li.on {
 				// color: #000;
-				color: var(--keyColor);
+				// color: var(--keyColor);
+				color: rgba(var(--keyRGB), 1);
 			}
 		}
 
