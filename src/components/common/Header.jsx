@@ -13,6 +13,7 @@ export default function Header() {
 	const { dispatch } = useGlobalDispatch();
 	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
+
 	const { pathname } = useLocation();
 
 	/* return (

@@ -1,7 +1,6 @@
-//npm i react-icons
 .header {
 	width: 100%;
-	padding: 30px 15vw;
+	padding: 50px 15vw;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -21,7 +20,7 @@
 		.gnb {
 			display: flex;
 			gap: 50px;
-			font: 600 0.8rem/1 'raleway';
+			font: 600 0.8rem/1 'orbitron';
 			color: #888;
 
 			li.on {
@@ -59,7 +58,7 @@
 			display: none;
 		}
 		.btnMobile {
-			display: block;
+			display: none;
 		}
 	}
 }
