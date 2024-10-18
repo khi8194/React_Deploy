@@ -3,7 +3,8 @@
 // import { FaBars } from 'react-icons/fa';
 
 import { useEffect } from 'react';
-import { useGlobalState } from '../../hooks/useGlobal';
+// import { useGlobalState } from '../../hooks/useGlobal';
+import { useGlobalDispatch, ACTIONS } from '../../hooks/useGlobal';
 import { motion } from 'framer-motion';
 import useThrottle from '../../hooks/useThrottle';
 
@@ -41,7 +42,9 @@ export default function MobileMenu() {
 
 	// return <aside className='mobileMenu'>MobileMenu</aside>;
 	// const { menuDispatch } = useGlobalState();
-	const { dispatch } = useGlobalState();
+	// const { dispatch } = useGlobalState();
+	console.log('mobileMenu');
+	const { dispatch } = useGlobalDispatch();
 
 	const { initial, animate, exit, transition } = {
 		initial: { x: -300, opacity: 0 },
@@ -66,9 +69,16 @@ export default function MobileMenu() {
 		// <aside className='mobileMenu' onClick={() => menuDispatch({ type: 'CLOSE' })}>
 		// <aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
 		// <motion.aside className='mobileMenu' onClick={() => dispatch({ type: 'CLOSE' })}>
+		// <motion.aside
+		// 	className='mobileMenu'
+		// 	onClick={() => dispatch({ type: 'CLOSE' })}
+		// 	initial={initial}
+		// 	animate={animate}
+		// 	exit={exit}
+		// 	transition={transition}>
 		<motion.aside
 			className='mobileMenu'
-			onClick={() => dispatch({ type: 'CLOSE' })}
+			onClick={() => dispatch({ type: ACTIONS.SET_MENU_CLOSE })}
 			initial={initial}
 			animate={animate}
 			exit={exit}

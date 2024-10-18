@@ -1,13 +1,16 @@
 import { FaBars, FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
 // import { FaYoutube, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-import { useGlobalState } from '../../hooks/useGlobal';
+// import { useGlobalState } from '../../hooks/useGlobal';
+import { useGlobalDispatch, ACTIONS } from '../../hooks/useGlobal';
 
 export default function Header() {
 	//순서1 - 커스텀훅으로부터 모바일패널 제어를 위한 상태값, 상태변경함수를 전역으로도 가져옴
 	// const { MobileOpen, setMobileOpen } = useGlobalState();
 	// const { menuDispatch } = useGlobalState();
-	const { dispatch } = useGlobalState();
+	// const { dispatch } = useGlobalState();
+	console.log('header');
+	const { dispatch } = useGlobalDispatch();
 	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
 
@@ -73,7 +76,8 @@ export default function Header() {
 				{/* 순서2 - 모바일 호출버튼 클릭시 상태변경함수를 통해서 패널 열고 닫기 */}
 				{/* <span className='btnMobile' onClick={() => setMobileOpen(!MobileOpen)}> */}
 				{/* <span className='btnMobile' onClick={() => menuDispatch({ type: 'TOGGLE' })}> */}
-				<span className='btnMobile' onClick={() => dispatch({ type: 'TOGGLE' })}>
+				{/* <span className='btnMobile' onClick={() => dispatch({ type: 'TOGGLE' })}> */}
+				<span className='btnMobile' onClick={() => dispatch({ type: ACTIONS.SET_MENU_TOGGLE })}>
 					<FaBars />
 				</span>
 			</header>
