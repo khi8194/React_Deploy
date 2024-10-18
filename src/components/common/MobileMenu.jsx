@@ -21,12 +21,13 @@ export default function MobileMenu() {
 		// if (window.innerWidth >= 1000) dispatch({ type: 'CLOSE' });
 		if (window.innerWidth >= 1000) setMenuClose();
 	};
-	const throttleCloseMenu = useThrottle(closeMenu);
+	const throttledCloseMenu = useThrottle(closeMenu);
 
 	useEffect(() => {
-		window.addEventListener('resize', throttleCloseMenu);
-		return () => window.removeEventListener('resize', throttleCloseMenu);
-	}, [throttleCloseMenu]);
+		window.addEventListener('resize', throttledCloseMenu);
+
+		return () => window.removeEventListener('resize', throttledCloseMenu);
+	}, [throttledCloseMenu]);
 
 	return (
 		// <motion.aside

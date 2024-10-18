@@ -12,6 +12,8 @@ export const useZustandStore = create(set => ({
 /*
 미션
 기존과 같은 로직으로 갤러리 컴포넌트와 모달 컴포넌트를 위의 useZustandStore 훅을 통해 전역상태 관리처리
+
+미션 - 2시 35분까지 useZustand를 활용한 전역 상태관리 흐름 정리
 */
 
 /*

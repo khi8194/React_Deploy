@@ -10,9 +10,19 @@ import { useZustandStore } from '../../hooks/useZustand';
 
 export default function Gallery() {
 	console.log('gallery');
-	// const { store } = useGlobalState();
-	// const { dispatch } = useGlobalDispatch();
-	const { IsModal, setModalOpen } = useZustandStore();
+
+	/*
+	미션
+	아래와 같은 방식으로 App, Header에 선택적 상태구독 처리를 해서 Gallery에서 Modal컴포넌트 호출시 불필요한 App, Header 컴포넌트의 불필요한 리랜더링 방지 처리
+	*/
+
+	// const { IsModal, setModalOpen } = useZustandStore();
+	//커스텀훅에 콜백함수를 인수로 넣어서 자동전달되는 전역 state에서 직접 IsModal상태값을 추출해서 변수에 담아줌
+	//위와 같은 로직을 통해서 해당 갤러리 컴포넌트 IsModal값을 제외한 나머지 전역 상태값 변경에는 반응하지 않는 선택적 상태구독 처리
+	//이슈사항: 아래와 같이 선택적 상태구독을 했음에도 불구하고 Gallery컴포넌트는 다른 전역 상태값 변경 시 계속 재랜더링 됨
+	//이유: 해당 컴포넌트 자체적으로 선택적 상태구독을 했다고 하더라도 gallery를 감싸는 부모 컴포넌트가 재랜더링시 자식 컴포넌트 같이 재랜더링됨
+	const IsModal = useZustandStore(state => state.IsModal);
+	const setModalOpen = useZustandStore(state => state.setModalOpen);
 
 	//순서1 - 커스텀훅을 통해 전역관리되는 상태값인 ModalOpen, setModlOpen 가져옴
 	const ref_gallery = useRef(null);
