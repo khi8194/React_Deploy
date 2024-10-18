@@ -64,7 +64,7 @@
 				//활성화 패널
 				&.swiper-slide-active {
 					.inner {
-						opacity: 1;
+						opacity: 1; //
 						transform: scale(1);
 					}
 				}
