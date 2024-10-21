@@ -15,7 +15,7 @@ export default function MailForm() {
 		e.preventDefault();
 		emailjs
 			.sendForm(import.meta.env.VITE_SERVICE_KEY, import.meta.envVITE_TEMPLATE_KEY, ref_form.current, {
-				publicKey: import.meta.env.VITE_PRIMARY_KEY
+				publicKey: import.meta.env.VITE_PUBLIC_KEY
 			})
 			.then(res => {
 				alert('문의내용이 관리자에 전달되었습니다.');
