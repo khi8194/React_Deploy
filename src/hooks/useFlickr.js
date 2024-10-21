@@ -10,7 +10,11 @@ const fetchFlickr = async ({ queryKey }) => {
 
 	const flickr_api = import.meta.env.VITE_FLICKR_API;
 	const myID = '201494903@N03';
-	const num = 20;
+	const num = 19;
+	/*
+	4개 배수가 맞지 않으면 마지막줄의 사진은 양끝에 배치되거나 가운데정렬되는 일이 발생
+	
+	*/
 	let url = '';
 
 	const urlMine = `${baseURL}?method=${method_mine}&api_key=${flickr_api}&user_id=${myID}&per_page=${num}&nojsoncallback=1&format=json`;
