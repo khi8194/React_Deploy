@@ -1,15 +1,15 @@
-.btnToggle {
-	position: fixed;
-	top: 3vh;
-	right: 10vw;
-	z-index: 6;
-	cursor: pointer;
-	background: transparent;
-	border: none;
-	cursor: pointer;
-	font-size: 1rem;
-	display: none;
-}
+// .btnToggle {
+// 	position: fixed;
+// 	top: 3vh;
+// 	right: 10vw;
+// 	z-index: 6;
+// 	cursor: pointer;
+// 	background: transparent;
+// 	border: none;
+// 	cursor: pointer;
+// 	font-size: 1rem;
+// 	display: none;
+// }
 
 .mobileMenu {
 	width: 280px;
@@ -21,10 +21,50 @@
 	top: 0px;
 	z-index: 6;
 	box-shadow: 0px 30px 30px (rgba(0, 0, 0, 0.1));
-}
 
-@media screen and (max-width: $tablet) {
-	.btnToggle {
-		display: block;
+	//모바일메뉴 탭 설정
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+
+	h1 {
+		width: 100%;
+		padding: 50px;
+		height: 40%;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+		font: 500 2.4rem/1 'orbitron';
+		letter-spacing: 1px;
+	}
+
+	ul {
+		width: 100%;
+		height: 50%;
+		display: flex;
+		flex-wrap: wrap;
+
+		li {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			padding: 0px 50px;
+			font: 700 1rem/1 'raleway';
+			color: #888;
+			border-top: 1px solid #fff;
+			text-shadow: 2px 2px 2px #fff;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+			svg {
+				margin-right: 10px;
+			}
+		}
 	}
 }
+
+// @media screen and (max-width: $tablet) {
+// 	.btnToggle {
+// 		display: block;
+// 	}
+// }
