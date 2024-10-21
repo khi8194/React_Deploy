@@ -41,9 +41,6 @@ export default function Map() {
 	const ref_instMarker = useRef(null);
 	const ref_instView = useRef(null);
 
-	//지도, 마커, 뷰 인스턴스 생성하는 메서드
-	//useCallback으로 함수 메모이제이션 출력할 인스턴스 정보가 변경될때에만 메모이제이션 풀림
-	//Index를 의존성 배열에 등록할 필요 없는 이유 (latlng, markerImg) 등등의 정보가 이미 Index상태값 변경될때마다 달라지는 값이고 해당 값을 의존성에 등록했기 때문
 	const createMap = useCallback(() => {
 		ref_mapFrame.current.innerHTML = '';
 		ref_instMap.current = new kakao.maps.Map(ref_mapFrame.current, { center: latlng });
@@ -54,7 +51,6 @@ export default function Map() {
 		ref_instView.current = new kakao.maps.Roadview(ref_viewFrame.current);
 		ref_instMarker.current.setMap(ref_instMap.current);
 
-		// [setTraffic, setRoadview].forEach(func => func(false));
 		[ref_instType.current, ref_instZoom.current].forEach(inst => ref_instMap.current.addControl(inst));
 		ref_instClient.current.getNearestPanoId(latlng, 50, panoId => ref_instView.current.setPanoId(panoId, latlng));
 	}, [kakao, latlng, markerImg, markerSize, markerPos]);
@@ -64,17 +60,12 @@ export default function Map() {
 		ref_instMap.current.setCenter(latlng);
 	}, [latlng]);
 
-	//useThrottle커스텀훅을 통해서 throttle이 적용된 새로운 throttledInitPos라는 함수 반환받음
 	const throttledInitPos = useThrottle(initPos);
 
-	//해당 useEffect에 Index의존성 배열 불필요한 이유
-	//이유 : 의존성배열에 createMap이 등록되어 있고 이미 createMap자체적으로 의존성배열에 Index에 따라 달라지는 값들을 등록되어 있음
-	//따라서 지도를 그리는데 필요한 Index상태값 기반의 정보값이 바뀌면 새롭게 바뀐 내용으로 createMap이 호출되고 그렇지 않으면 메모이제이션 함수 자체 재호출
 	useEffect(() => {
 		createMap();
 		window.addEventListener('resize', throttledInitPos);
 		return () => window.removeEventListener('resize', throttledInitPos);
-		// }, [Index, throttledInitPos, createMap]);
 	}, [throttledInitPos, createMap]);
 
 	useEffect(() => {
@@ -97,12 +88,10 @@ export default function Map() {
 			<nav className='btnSet'>
 				<ul className='branch'>
 					{ref_info.current.map((el, idx) => (
-						// <li key={idx} className={idx === Index ? 'on' : ''} onClick={() => setIndex(idx)}>
 						<li
 							key={idx}
 							className={idx === Index ? 'on' : ''}
 							onClick={() => {
-								//실제 각 지점 버튼 클릭시 Traffic, Roadview 상태값 초기화처리
 								setIndex(idx);
 								setTraffic(false);
 								setRoadview(false);

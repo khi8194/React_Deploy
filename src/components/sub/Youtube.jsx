@@ -1,4 +1,3 @@
-// import { useState, useEffect, useCallback } from 'react';
 import Layout from '../common/Layout';
 import Pic from '../common/Pic';
 import useShortenText from '../../hooks/useShortenText';
@@ -11,13 +10,10 @@ export default function Youtube() {
 	const shortenText = useShortenText();
 	const combineText = useCombineText();
 
-	// const { data: Vids, isPending } = useYoutubeQuery();
 	const { data: Vids, isPending } = useYoutubeQuery({ type: 'B' });
 
 	return (
 		<Layout title={'YOUTUBE'}>
-			{/* <Content delay={1}>
-				{Vids.map((vid, idx) => { */}
 			<Content delay={1}>
 				{isPending && <p>Loading...</p>}
 				{Vids?.map((vid, idx) => {

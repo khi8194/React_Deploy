@@ -1,31 +1,11 @@
 import Layout from '../common/Layout';
 import memberData from '../../data/memberData';
 import Pic from '../common/Pic';
-// import { useRef, useState } from 'react';
 import MaskBox from '../common/MaskBox';
 import MaskText from '../common/MaskText';
 import Content from '../common/Content';
-// import { useGlobalState } from '../../hooks/useGlobal';
 
 export default function Members() {
-	/*
-	console.log('Member rendered!!');
-
-	const refEl = useRef(0);
-	const [Num, setNum] = useState(0);
-
-	const changeRef = () => {
-		console.log('changeRef called!!');
-		refEl.current = 1;
-	};
-
-	const changeState = () => {
-		console.log('changeState called!!');
-		setNum(Num + 1);
-	};
-	*/
-
-	// const { menuDispatch } = useGlobalState();
 	console.log('Members');
 
 	return (
@@ -40,7 +20,6 @@ export default function Members() {
 				<article className='ceoBox'>
 					<div className='txt'>
 						<h2>{memberData[0].name}</h2>
-						{/* <h2 onClick={() => menuDispatch({ type: 'OPEN' })}>{memberData[0].name}</h2> */}
 						<p>{memberData[0].position}</p>
 					</div>
 
@@ -51,9 +30,7 @@ export default function Members() {
 
 				<article className='memberListBox'>
 					<div className='titBox'>
-						{/* <h2 onClick={changeRef}>Our Team Member</h2> */}
 						<h2>Our Team Member</h2>
-						{/* <p onClick={changeState}> */}
 						<p>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iste accusantium! Eum corrupti
 							voluptates natus! Harum dolorum reprehenderit modi nostrum?
