@@ -61,6 +61,8 @@ export default function Gallery() {
 		<>
 			<Layout title={'GALLERY'}>
 				<Content delay={1.5} customMotion={customMotion}>
+					<p>This web page was created fot study purposes, not for commercial use.</p>
+					<p>The Images below is sourced from unplash.com</p>
 					<article className='controller'>
 						<ul className='type'>
 							{/* className을 조건처리할때는 &&연산자 사용불가 : className에는 boolean이 아닌 문자값이 와야됨 */}
