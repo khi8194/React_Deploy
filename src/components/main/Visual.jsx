@@ -30,8 +30,9 @@ function BtnStart() {
 }
 
 export default function Visual() {
-	const [Index, setIndex] = useState();
+	const [Index, setIndex] = useState(0);
 	const { data, isSuccess } = useFlickrQuery({ type: 'mine' });
+
 	return (
 		<figure className='visual'>
 			<div className='textBox'>
@@ -46,6 +47,7 @@ export default function Visual() {
 			<Swiper
 				//Virtual 모듈 연결 (동적 요소 Slide 추가시에는 Virtaul 설정 추가해야함)
 				modules={[Autoplay, Pagination, Virtual]}
+				virtual
 				pagination={{ type: 'fraction' }}
 				slidesPerView={1}
 				spaceBetween={0}
@@ -76,7 +78,8 @@ export default function Visual() {
 						if (idx >= 10) return null;
 						return (
 							//virtualIndex 추가 지정
-							<SwiperSlide key={pic.id} virtualIndex={idx}>
+							// <SwiperSlide key={pic.id} virtualIndex={idx}>
+							<SwiperSlide key={pic} virtualIndex={idx}>
 								{/*
 							원래 코드 : <SwiperSlide key={pic} virtualIndex={idx}>
 							gpt 코드 : <SwiperSlide key={pic.id} virtualIndex={idx}>
