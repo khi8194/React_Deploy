@@ -14,7 +14,7 @@ export default function MailForm() {
 	const sendForm = e => {
 		e.preventDefault();
 		emailjs
-			.sendForm(import.meta.env.VITE_SERVICE_KEY, import.meta.envVITE_TEMPLATE_KEY, ref_form.current, {
+			.sendForm(import.meta.env.VITE_SERVICE_KEY, import.meta.env.VITE_TEMPLATE_KEY, ref_form.current, {
 				publicKey: import.meta.env.VITE_PUBLIC_KEY
 			})
 			.then(res => {
