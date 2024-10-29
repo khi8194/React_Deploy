@@ -22,7 +22,7 @@ export default function PostDetail() {
     .catch(err => console.log(err));
   };
 
-  // 상세페이지 마운트시 자동으로 상세데이터 가져옴
+  // 상세페이지 마운트시 자동으로 상세데이터 가져옴.
   useEffect(() => {
     axios.get(`http://localhost:8000/posts/${slug}`).then(res => {
       setDetail(res.data);
