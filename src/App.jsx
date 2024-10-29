@@ -7,6 +7,7 @@ import Members from './components/sub/Members';
 import Posts from './components/sub/Posts';
 import PostDetail from './components/sub/PostDetail';
 import PostAdd from './components/sub/PostAdd';
+import PostEdit from './components/sub/PostEdit';
 import Youtube from './components/sub/Youtube';
 import YoutubeDetail from './components/sub/YoutubeDetail';
 import MobileMenu from './components/common/MobileMenu';
@@ -35,6 +36,8 @@ export default function App() {
 					<Route path='/posts' element={<Posts />} />
 					<Route path='/post/:slug' element={<PostDetail />} />
 					<Route path='/post-add' element={<PostAdd />} />
+					<Route path='/post-edit/:slug' element={<PostEdit />} />
+
 				</Routes>
 			</AnimatePresence>
 

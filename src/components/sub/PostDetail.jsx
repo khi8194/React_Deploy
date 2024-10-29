@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Layout from '../common/Layout';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -37,6 +37,9 @@ export default function PostDetail() {
         <span>Created : {Detail?.created.split("T")[0]}</span>
       </section>
 
+      <button>
+				<Link to={`/post-edit/${slug}`}>Edit</Link>
+			</button>
       <button onClick={handleDelete}>Delete</button>
 		</Layout>
 	);
