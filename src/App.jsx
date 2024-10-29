@@ -5,6 +5,8 @@ import Contact from './components/sub/Contact';
 import Gallery from './components/sub/Gallery';
 import Members from './components/sub/Members';
 import Posts from './components/sub/Posts';
+import PostDetail from './components/sub/PostDetail';
+import PostAdd from './components/sub/PostAdd';
 import Youtube from './components/sub/Youtube';
 import YoutubeDetail from './components/sub/YoutubeDetail';
 import MobileMenu from './components/common/MobileMenu';
@@ -31,6 +33,8 @@ export default function App() {
 					<Route path='/youtube/:id' element={<YoutubeDetail />} />
 					<Route path='/contact' element={<Contact />} />
 					<Route path='/posts' element={<Posts />} />
+					<Route path='/post/:slug' element={<PostDetail />} />
+					<Route path='/post-add' element={<PostAdd />} />
 				</Routes>
 			</AnimatePresence>
 
